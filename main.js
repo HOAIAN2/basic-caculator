@@ -71,6 +71,10 @@ function Operationcheck() {
 }
 function Result() {
     Equal_button.addEventListener('click', ()=>{
+        Equal_button.style.backgroundColor = "#34eb4c"
+        setTimeout(() =>{
+            Equal_button.style.backgroundColor = "rgba(255, 255, 255, 1)"
+        }, 500)
         let CurrentString = Current.innerText
         if(CurrentString == Previous.innerText) return
         let temp1, temp2 // create 2 temp and convert to string later
@@ -114,12 +118,20 @@ function Result() {
 }
 function ClearAll() {
     clear_all_button.addEventListener('click', ()=>{
+        clear_all_button.style.backgroundColor = "rgb(245, 17, 51)"
+        setTimeout(() =>{
+            clear_all_button.style.backgroundColor = "rgba(255, 255, 255, 1)"
+        }, 500)
         document.querySelector('.Previous').innerText = ''
         document.querySelector('.Current').innerText = ''
     })
 }
 function Delete() {
     delete_button.addEventListener('click', ()=>{
+        delete_button.style.backgroundColor = "rgb(240, 247, 42)"
+        setTimeout(() =>{
+            delete_button.style.backgroundColor = "rgba(255, 255, 255, 1)"
+        }, 500)
         Current.innerText = Current.innerText.slice(0, Current.innerText.length-1)
     })
 }

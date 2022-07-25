@@ -103,7 +103,8 @@ function Result() {
                 if(CurrentString.indexOf('.') == CurrentString.length-1) Current.innerText = Current.innerText.slice(0, Current.innerText.length-1)
                 break;
         }
-        Previous.innerText = Current.innerText
+        if(temp2 == undefined) Previous.innerText = temp1
+        else Previous.innerText = temp1 + operate + temp2
     })
 }
 function ClearAll() {

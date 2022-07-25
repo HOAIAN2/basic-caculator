@@ -20,7 +20,9 @@ function Getnumbers() {
 function Decimal() {
     decimal.addEventListener('click', () => {
         let firstDec = -1, secondDec = -1
+        if(Current.innerText.indexOf('.') == Current.innerText.length-1) return
         if(Current.innerText == '') return
+        // find the first decimal, if click deciaml again ('..') block
         // find the first decimal, then find another then block clicking
         if(Current.innerText.indexOf('.') != -1) firstDec = Current.innerText.indexOf('.')
         if(firstDec != -1)

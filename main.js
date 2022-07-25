@@ -100,6 +100,7 @@ function Result() {
             else Current.innerText = number1 / number2
                 break;
             default:
+                if(CurrentString.indexOf('.') == CurrentString.length-1) Current.innerText = Current.innerText.slice(0, Current.innerText.length-1)
                 break;
         }
         Previous.innerText = Current.innerText

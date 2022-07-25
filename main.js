@@ -43,10 +43,10 @@ function Getoperate() {
         button.addEventListener('click', () =>{
             let Check = document.querySelector('.Current').innerText;
             if(Check == '') return
-            if(Check.indexOf('+') != -1) return
-            if(Check.indexOf('-') != -1) return
-            if(Check.indexOf('x') != -1) return
-            if(Check.indexOf('/') != -1) return
+            if(Check.indexOf('+') != -1) Equal_button.click()
+            if(Check.indexOf('-') != -1) Equal_button.click()
+            if(Check.indexOf('x') != -1) Equal_button.click()
+            if(Check.indexOf('/') != -1) Equal_button.click()
             else Current.innerText =  Current.innerText + button.innerText;
         })
     })

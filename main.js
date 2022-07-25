@@ -1,4 +1,5 @@
 const number_input = document.querySelectorAll('.Number')
+const decimal = document.querySelector('.Decimal')
 const oparate_input = document.querySelectorAll('.Operate')
 const clear_all_button = document.querySelector('.Clear-All')
 const delete_button = document.querySelector('.Delete')
@@ -9,8 +10,30 @@ const Run =  document.querySelectorAll('button')
 function Getnumbers() {
     number_input.forEach(button =>{
         button.addEventListener('click', () => {
+            // let Check = document.querySelectorAll('.Number')
+            // let NoClick = Check[9] ;
+            // if(Current.innerText == '')
+            // {
+            //     NoClick.addEventListener('click' , (event) =>{
+            //         event.preventDefault();
+            //     })
+            // }
             Current.innerText = Current.innerText + button.innerText;
         })
+    })
+}
+function Decimal() {
+    decimal.addEventListener('click', () => {
+        let firstDec = -1, secondDec = -1
+        if(Current.innerText == '') return
+        // find the first decimal, then find another then block clicking
+        if(Current.innerText.indexOf('.') != -1) firstDec = Current.innerText.indexOf('.')
+        if(firstDec != -1)
+        {
+            if(Current.innerText.indexOf('.', firstDec+1) != -1) secondDec = Current.innerText.indexOf('.', firstDec+1)
+        }
+        if(firstDec != -1 && secondDec != -1) return
+        else Current.innerText = Current.innerText + decimal.innerText;
     })
 }
 function Getoperate() {
@@ -94,6 +117,7 @@ function Delete() {
 }
 function main() {
     Getnumbers()
+    Decimal()
     Getoperate()
     ClearAll()
     Result()

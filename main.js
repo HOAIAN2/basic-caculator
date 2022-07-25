@@ -10,14 +10,9 @@ const Run =  document.querySelectorAll('button')
 function Getnumbers() {
     number_input.forEach(button =>{
         button.addEventListener('click', () => {
-            // let Check = document.querySelectorAll('.Number')
-            // let NoClick = Check[9] ;
-            // if(Current.innerText == '')
-            // {
-            //     NoClick.addEventListener('click' , (event) =>{
-            //         event.preventDefault();
-            //     })
-            // }
+            let Check = document.querySelectorAll('.Number')
+            let NoClick = Check[9] ;
+            if(Current.innerText == '0') return
             Current.innerText = Current.innerText + button.innerText;
         })
     })

@@ -85,13 +85,17 @@ function Result() {
             number2 = parseFloat(temp2) ; console.log(number2)
         }
         switch (operate) {
-            case '+': Current.innerText = number1 + number2
+            case '+': if(isNaN(number2)) Current.innerText = number1
+            else Current.innerText = number1 + number2 
                 break;
-            case '-': Current.innerText = number1 - number2
+            case '-': if(isNaN(number2)) Current.innerText = number1
+            else Current.innerText = number1 - number2
                 break;
-            case 'x': Current.innerText = number1 * number2
+            case 'x': if(isNaN(number2)) Current.innerText = number1
+            else Current.innerText = number1 * number2
                 break;
-            case '/': Current.innerText = number1 / number2
+            case '/': if(isNaN(number2)) Current.innerText = number1
+            else Current.innerText = number1 / number2
                 break;
             default:
                 break;

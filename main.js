@@ -111,6 +111,7 @@ function Delete() {
     })
 }
 function main() {
+    console.log('performance')
     Getnumbers()
     Decimal()
     Getoperate()

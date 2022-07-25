@@ -21,7 +21,12 @@ function Decimal() {
     decimal.addEventListener('click', () => {
         let firstDec = -1, secondDec = -1
         if(Current.innerText.indexOf('.') == Current.innerText.length-1) return
-        if(Current.innerText == '') return
+        if(Current.innerText == '') return ;
+        if(Operationcheck() == 'NoOperate')
+        {
+            console.log(Current.innerText.indexOf('.'))
+            if(Current.innerText.indexOf('.') != -1) return
+        }
         // find the first decimal, if click deciaml again ('..') block
         // find the first decimal, then find another then block clicking
         if(Current.innerText.indexOf('.') != -1) firstDec = Current.innerText.indexOf('.')
@@ -119,7 +124,6 @@ function Delete() {
     })
 }
 function main() {
-    console.log('performance')
     Getnumbers()
     Decimal()
     Getoperate()

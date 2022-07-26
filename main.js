@@ -101,10 +101,7 @@ function CreateHistory() {
 function ClearHistory() {
     history_clear.addEventListener('click', () => {
         let x = document.querySelectorAll('p')
-        for(let index = 0; index < x.length; index++)
-        {
-            x[index].remove()
-        }
+        x.remove()
     })
 }
 function Result() {

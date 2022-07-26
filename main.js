@@ -55,6 +55,7 @@ function Getoperate() {
         button.addEventListener('click', () =>{
             let Check = document.querySelector('.Current').innerText;
             if(Check == '') return
+            if(Check == '-') return
             if(Check.indexOf('+',1) != -1) Equal_button.click()
             if(Check.indexOf('-',1) != -1) Equal_button.click()
             if(Check.indexOf('x',1) != -1) Equal_button.click()
@@ -202,14 +203,17 @@ function Keyboard() {
             case '8': number_input[7].click() ; break;
             case '9': number_input[8].click() ; break;
             case '0': number_input[9].click() ; break;
-            case 'Delete': if(Process_Div.style.display == 'flex') delete_button.click() ; break;
+            case 'Delete':
+                if(Process_Div.style.display == 'flex') delete_button.click()
+                else history_clear.click()
             case '+': oparate_input[0].click() ; break;
             case '-': 
-            if(Current.innerText == '') negative_input.click()
-            else oparate_input[1].click() ; break;
+                if(Current.innerText == '') negative_input.click()
+                else oparate_input[1].click() ; break;
             case '*': oparate_input[2].click() ; break;
             case '/': oparate_input[3].click() ; break;
             case '.': decimal.click() ; break;
+            case 'h': history_button.click() ; break;
             default:
                 break;
         }

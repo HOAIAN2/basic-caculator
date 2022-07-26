@@ -186,8 +186,38 @@ function Delete() {
         Current.innerText = Current.innerText.slice(0, Current.innerText.length-1)
     })
 }
+function Keyboard() {
+    window.addEventListener('keydown', (e) =>{
+        console.log(e.key)
+        switch (e.key) {
+            case '=': Equal_button.click() ; break;
+            case 'Enter': Equal_button.click() ; break;
+            case '1': number_input[0].click() ; break;
+            case '2': number_input[1].click() ; break;
+            case '3': number_input[2].click() ; break;
+            case '4': number_input[3].click() ; break;
+            case '5': number_input[4].click() ; break;
+            case '6': number_input[5].click() ; break;
+            case '7': number_input[6].click() ; break;
+            case '8': number_input[7].click() ; break;
+            case '9': number_input[8].click() ; break;
+            case '0': number_input[9].click() ; break;
+            case 'Delete': if(Process_Div.style.display == 'flex') delete_button.click() ; break;
+            case '+': oparate_input[0].click() ; break;
+            case '-': 
+            if(Current.innerText == '') negative_input.click()
+            else oparate_input[1].click() ; break;
+            case '*': oparate_input[2].click() ; break;
+            case '/': oparate_input[3].click() ; break;
+            case '.': decimal.click() ; break;
+            default:
+                break;
+        }
+    })
+}
 function main() {
     Process_Div.style.display = 'flex' // Fix first click on History
+    Keyboard()
     CreateHistory()
     ClearHistory()
     Getnumbers()

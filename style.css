@@ -59,6 +59,7 @@ svg
     height: 170px;
     word-wrap: break-word; /* Wrap when ouput to long */
     word-break: break-all;
+    transition: 0.2s;
 }
 .Result > .Previous
 {
@@ -78,6 +79,7 @@ svg
     flex-wrap: wrap;
     /* justify-content: center; */
     /* align-items: center; */
+    transition: 0.2s;
 }
 button
 {

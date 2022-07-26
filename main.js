@@ -86,22 +86,33 @@ function CreateHistory() {
         console.log('click', ' ', Process_Div.style.display)
         if(Process_Div.style.display == 'flex')
         {
-            Process_Div.style.display = 'none'
-            Result_Div.style.display = 'none'
-            Full_History.style.height = '525px'
+            setTimeout(() => {
+                Process_Div.style.display = 'none'
+                Result_Div.style.display = 'none'
+                Full_History.style.height = '525px'
+            },100)
+            Process_Div.style.opacity = '0'
+            Result_Div.style.opacity = '0'
         }
         else
         {
             Process_Div.style.display = 'flex'
             Result_Div.style.display = 'flex'
             Full_History.style.height = '30px'
+            setTimeout(() => {
+                Process_Div.style.opacity = '1'
+                Result_Div.style.opacity = '1'
+            },100)
         }
     })
 }
 function ClearHistory() {
     history_clear.addEventListener('click', () => {
         let x = document.querySelectorAll('p')
-        x.remove()
+        for(let index = 0; index < x.length; index++)
+        {
+            x[index].remove()
+        }
     })
 }
 function Result() {

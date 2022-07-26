@@ -31,7 +31,7 @@ svg
     width: 23px;
     cursor: pointer;
 }
-#Clear-History
+#Clear-History > svg
 {
     margin-left: 50%;
     transform: translateX(-50%);

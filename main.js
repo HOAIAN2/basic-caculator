@@ -3,6 +3,11 @@ const decimal = document.querySelector('.Decimal')
 const oparate_input = document.querySelectorAll('.Operate')
 const negative_input = document.querySelector('.Negative')
 const clear_all_button = document.querySelector('.Clear-All')
+const history_button = document.querySelector('svg')
+const Full_History = document.querySelector('#History')
+const Main_History = document.querySelector('#History-Bar')
+const Result_Div = document.querySelector('.Result')
+const Process_Div = document.querySelector('#Main-Process')
 const delete_button = document.querySelector('.Delete')
 const Equal_button = document.querySelector('.Equal')
 const Previous = document.querySelector('.Previous')
@@ -75,6 +80,23 @@ function Operationcheck() {
         }
     }
 }
+function CreateHistory() {
+    history_button.addEventListener('click', () => { // Lmao code only run at the second click
+        console.log('click', ' ', Process_Div.style.display)
+        if(Process_Div.style.display == 'flex')
+        {
+            Process_Div.style.display = 'none'
+            Result_Div.style.display = 'none'
+            Full_History.style.height = '525px'
+        }
+        else
+        {
+            Process_Div.style.display = 'flex'
+            Result_Div.style.display = 'flex'
+            Full_History.style.height = '30px'
+        }
+    })
+}
 function Result() {
     Equal_button.addEventListener('click', ()=>{
         Equal_button.style.backgroundColor = "#34eb4c"
@@ -103,7 +125,7 @@ function Result() {
         }
         switch (operate) {
             case '+': if(isNaN(number2)) Current.innerText = number1
-            else Current.innerText = number1 + number2 
+            else Current.innerText = number1 + number2
                 break;
             case '-': if(isNaN(number2)) Current.innerText = number1
             else Current.innerText = number1 - number2
@@ -121,6 +143,10 @@ function Result() {
         console.log(Current.innerText)
         if(temp2 == undefined) Previous.innerText = temp1
         else Previous.innerText = temp1 + operate + temp2
+        // Save result to History
+        let history_temp = document.createElement("p");
+        history_temp.innerText = Previous.innerText + ' = ' + Current.innerText ; console.log(history_temp)
+        Main_History.appendChild(history_temp)
     })
 }
 function ClearAll() {
@@ -143,6 +169,7 @@ function Delete() {
     })
 }
 function main() {
+    CreateHistory()
     Getnumbers()
     Decimal()
     Negative()

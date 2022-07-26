@@ -205,7 +205,7 @@ function Keyboard() {
             case '0': number_input[9].click() ; break;
             case 'Delete':
                 if(Process_Div.style.display == 'flex') delete_button.click()
-                else history_clear.click()
+                else history_clear.click() ; break;
             case '+': oparate_input[0].click() ; break;
             case '-': 
                 if(Current.innerText == '') negative_input.click()

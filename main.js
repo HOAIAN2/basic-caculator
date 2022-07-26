@@ -1,6 +1,7 @@
 const number_input = document.querySelectorAll('.Number')
 const decimal = document.querySelector('.Decimal')
 const oparate_input = document.querySelectorAll('.Operate')
+const negative_input = document.querySelector('.Negative')
 const clear_all_button = document.querySelector('.Clear-All')
 const delete_button = document.querySelector('.Delete')
 const Equal_button = document.querySelector('.Equal')
@@ -38,15 +39,20 @@ function Decimal() {
         else Current.innerText = Current.innerText + decimal.innerText;
     })
 }
+function Negative() {
+    negative_input.addEventListener('click', () => {
+        if(Current.innerText == '') Current.innerText = Current.innerText + '-'
+    })
+}
 function Getoperate() {
     oparate_input.forEach(button =>{
         button.addEventListener('click', () =>{
             let Check = document.querySelector('.Current').innerText;
             if(Check == '') return
-            if(Check.indexOf('+') != -1) Equal_button.click()
-            if(Check.indexOf('-') != -1) Equal_button.click()
-            if(Check.indexOf('x') != -1) Equal_button.click()
-            if(Check.indexOf('/') != -1) Equal_button.click()
+            if(Check.indexOf('+',1) != -1) Equal_button.click()
+            if(Check.indexOf('-',1) != -1) Equal_button.click()
+            if(Check.indexOf('x',1) != -1) Equal_button.click()
+            if(Check.indexOf('/',1) != -1) Equal_button.click()
             else Current.innerText =  Current.innerText + button.innerText;
         })
     })
@@ -54,16 +60,16 @@ function Getoperate() {
 function Operationcheck() {
     let Check = Current.innerText
     let operate_index
-    if(Check.indexOf('+') != -1) return '+'
+    if(Check.indexOf('+',1) != -1) return '+'
     else
     {
-        if(Check.indexOf('-') != -1) return '-'
+        if(Check.indexOf('-',1) != -1) return '-'
         else
         {
-            if(Check.indexOf('x') != -1) return 'x'
+            if(Check.indexOf('x',1) != -1) return 'x'
             else
             {
-                if(Check.indexOf('/') != -1) return '/'
+                if(Check.indexOf('/',1) != -1) return '/'
                 else return 'NoOperate' // return when user no caculate anything
             }
         }
@@ -74,7 +80,7 @@ function Result() {
         Equal_button.style.backgroundColor = "#34eb4c"
         setTimeout(() =>{
             Equal_button.style.backgroundColor = "rgba(255, 255, 255, 1)"
-        }, 500)
+        }, 300)
         let CurrentString = Current.innerText
         if(CurrentString == Previous.innerText) return
         let temp1, temp2 // create 2 temp and convert to string later
@@ -84,11 +90,11 @@ function Result() {
         console.log(operate)
         if(operate == 'NoOperate')
         {
-            temp1 = CurrentString ; number1 = parseFloat(temp1) ; console.log(number1)
+            temp1 = CurrentString ; number1 = parseFloat(temp1); console.log(number1)
         }
         else
         {
-            let operate_index = CurrentString.indexOf(operate)
+            let operate_index = CurrentString.indexOf(operate,1)
             console.log(operate_index)
             temp1 = CurrentString.slice(0, operate_index) ; console.log(temp1)
             temp2 = CurrentString.slice(operate_index + 1, CurrentString.length) ; console.log(temp2)
@@ -112,6 +118,7 @@ function Result() {
                 if(CurrentString.indexOf('.') == CurrentString.length-1) Current.innerText = Current.innerText.slice(0, Current.innerText.length-1)
                 break;
         }
+        console.log(Current.innerText)
         if(temp2 == undefined) Previous.innerText = temp1
         else Previous.innerText = temp1 + operate + temp2
     })
@@ -121,7 +128,7 @@ function ClearAll() {
         clear_all_button.style.backgroundColor = "rgb(245, 17, 51)"
         setTimeout(() =>{
             clear_all_button.style.backgroundColor = "rgba(255, 255, 255, 1)"
-        }, 500)
+        }, 300)
         document.querySelector('.Previous').innerText = ''
         document.querySelector('.Current').innerText = ''
     })
@@ -131,13 +138,14 @@ function Delete() {
         delete_button.style.backgroundColor = "rgb(240, 247, 42)"
         setTimeout(() =>{
             delete_button.style.backgroundColor = "rgba(255, 255, 255, 1)"
-        }, 500)
+        }, 300)
         Current.innerText = Current.innerText.slice(0, Current.innerText.length-1)
     })
 }
 function main() {
     Getnumbers()
     Decimal()
+    Negative()
     Getoperate()
     ClearAll()
     Result()

@@ -67,7 +67,7 @@ button
     cursor: pointer;
     transition: 0.25s;
 }
-button:first-child, button:last-child
+button:last-child
 {
     width: 150px;
 }

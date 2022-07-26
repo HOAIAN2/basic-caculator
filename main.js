@@ -3,7 +3,8 @@ const decimal = document.querySelector('.Decimal')
 const oparate_input = document.querySelectorAll('.Operate')
 const negative_input = document.querySelector('.Negative')
 const clear_all_button = document.querySelector('.Clear-All')
-const history_button = document.querySelector('svg')
+const history_button = document.querySelector('#History-Button')
+const history_clear = document.querySelector('#Clear-History')
 const Full_History = document.querySelector('#History')
 const Main_History = document.querySelector('#History-Bar')
 const Result_Div = document.querySelector('.Result')
@@ -97,6 +98,15 @@ function CreateHistory() {
         }
     })
 }
+function ClearHistory() {
+    history_clear.addEventListener('click', () => {
+        let x = document.querySelectorAll('p')
+        for(let index = 0; index < x.length; index++)
+        {
+            x[index].remove()
+        }
+    })
+}
 function Result() {
     Equal_button.addEventListener('click', ()=>{
         Equal_button.style.backgroundColor = "#34eb4c"
@@ -169,7 +179,9 @@ function Delete() {
     })
 }
 function main() {
+    Process_Div.style.display = 'flex' // Fix first click on History
     CreateHistory()
+    ClearHistory()
     Getnumbers()
     Decimal()
     Negative()

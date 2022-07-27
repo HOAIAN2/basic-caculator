@@ -203,7 +203,8 @@ function Keyboard() {
             case '8': number_input[7].click() ; break;
             case '9': number_input[8].click() ; break;
             case '0': number_input[9].click() ; break;
-            case 'Delete', 'Backspace':
+            case 'Delete':
+            case 'Backspace':
                 if(Process_Div.style.display == 'flex') delete_button.click()
                 else history_clear.click() ; break;
             case '+': oparate_input[0].click() ; break;

@@ -17,6 +17,10 @@ const Run =  document.querySelectorAll('button')
 function Getnumbers() {
     number_input.forEach(button =>{
         button.addEventListener('click', () => {
+            button.style.backgroundColor = "rgba(13, 235, 235, 1)"
+            setTimeout(() =>{
+                button.style.backgroundColor = "rgba(250, 250, 250, 1)"
+            }, 150)
             let Check = document.querySelectorAll('.Number')
             let NoClick = Check[9] ;
             if(Current.innerText == '0') return
@@ -26,6 +30,10 @@ function Getnumbers() {
 }
 function Decimal() {
     decimal.addEventListener('click', () => {
+        decimal.style.backgroundColor = "rgba(13, 235, 235, 1)"
+        setTimeout(() =>{
+            decimal.style.backgroundColor = "rgba(255, 255, 255, 1)"
+        }, 150)
         let firstDec = -1, secondDec = -1
         if(Current.innerText.indexOf('.') == Current.innerText.length-1) return
         if(Current.innerText == '') return ;
@@ -47,12 +55,20 @@ function Decimal() {
 }
 function Negative() {
     negative_input.addEventListener('click', () => {
+        negative_input.style.backgroundColor = "rgba(13, 235, 235, 1)"
+        setTimeout(() =>{
+            negative_input.style.backgroundColor = "rgba(255, 255, 255, 1)"
+        }, 150)
         if(Current.innerText == '') Current.innerText = Current.innerText + '-'
     })
 }
 function Getoperate() {
     oparate_input.forEach(button =>{
         button.addEventListener('click', () =>{
+            button.style.backgroundColor = "rgba(13, 235, 235, 1)"
+            setTimeout(() =>{
+                button.style.backgroundColor = "rgba(255, 255, 255, 1)"
+            }, 150)
             let Check = document.querySelector('.Current').innerText;
             if(Check == '') return
             if(Check == '-') return
@@ -91,7 +107,7 @@ function CreateHistory() {
                 Process_Div.style.display = 'none'
                 Result_Div.style.display = 'none'
                 Full_History.style.height = '525px'
-            },100)
+            },150)
             Process_Div.style.opacity = '0'
             Result_Div.style.opacity = '0'
         }
@@ -103,7 +119,7 @@ function CreateHistory() {
             setTimeout(() => {
                 Process_Div.style.opacity = '1'
                 Result_Div.style.opacity = '1'
-            },100)
+            },150)
         }
     })
 }

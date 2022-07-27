@@ -24,6 +24,17 @@ body
     border: 1px solid rgb(215, 215, 215);
     background-color: rgba(245, 245, 245, 1);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.55);
+    overflow: hidden;
+}
+.History-Button
+{
+    display: flex;
+    justify-content: space-between;
+}
+.History-Button > #Title
+{
+    pointer-events: none;
+    font-size: large;
 }
 svg
 {
@@ -42,6 +53,7 @@ svg
     width: 300px;
     height: 30px;
     overflow: hidden;
+    transition: 0.15s ease-in;
 }
 #History-Bar
 {
@@ -59,7 +71,7 @@ svg
     height: 170px;
     word-wrap: break-word; /* Wrap when ouput to long */
     word-break: break-all;
-    transition: 0.2s;
+    transition: 0.15s;
 }
 .Result > .Previous
 {
@@ -77,9 +89,7 @@ svg
     height: 300px;
     display: flex;
     flex-wrap: wrap;
-    /* justify-content: center; */
-    /* align-items: center; */
-    transition: 0.2s;
+    transition: 0.15s;
 }
 button
 {

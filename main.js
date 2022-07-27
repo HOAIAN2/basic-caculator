@@ -160,7 +160,7 @@ function Result() {
                 break;
         }
         console.log(Current.innerText)
-        if(temp2 == undefined) Previous.innerText = temp1
+        if(isNaN(number2)) Previous.innerText = temp1
         else Previous.innerText = temp1 + operate + temp2
         // Save result to History
         let history_temp = document.createElement("p");

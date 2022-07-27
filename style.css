@@ -72,6 +72,11 @@ svg
     word-wrap: break-word; /* Wrap when ouput to long */
     word-break: break-all;
     transition: 0.15s;
+    overflow-y: scroll;
+}
+.Result::-webkit-scrollbar
+{
+    display: none;
 }
 .Result > .Previous
 {

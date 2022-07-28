@@ -26,7 +26,6 @@ function Getnumbers() {
                 let NoClick = number_input[10]
                 let block_index
                 if (Operationcheck() != 'NoOperate') block_index = Current.innerText.indexOf(Operationcheck());
-                console.log(block_index)
                 if (Current.innerText.indexOf('0', block_index) == block_index + 1) {
                     block_index++
                     if (Current.innerText.indexOf('.', block_index) != block_index + 1) return

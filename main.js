@@ -14,6 +14,11 @@ const Equal_button = document.querySelector('.Equal')
 const Previous = document.querySelector('.Previous')
 const Current = document.querySelector('.Current')
 const Run =  document.querySelectorAll('button')
+const Switch_Mode =  document.querySelector('#Title')
+const Currency = document.querySelectorAll('select')
+const Input_Box = document.querySelectorAll('input')
+const Top = document.querySelector('.Top')
+const Bottom = document.querySelector('.Bottom')
 function Getnumbers() {
     number_input.forEach(button =>{
         button.addEventListener('click', () => {
@@ -21,10 +26,17 @@ function Getnumbers() {
             setTimeout(() =>{
                 button.style.backgroundColor = "rgba(250, 250, 250, 1)"
             }, 150)
-            let Check = document.querySelectorAll('.Number')
-            let NoClick = Check[9] ;
-            if(Current.innerText == '0') return
-            Current.innerText = Current.innerText + button.innerText;
+            if(Switch_Mode.innerText == 'CACULATOR')
+            {
+                let Check = document.querySelectorAll('.Number')
+                let NoClick = Check[9] ;
+                if(Current.innerText == '0') return
+                Current.innerText = Current.innerText + button.innerText;
+            }
+            else
+            {
+                Input_Box[0].value += button.innerText
+            }
         })
     })
 }
@@ -34,50 +46,60 @@ function Decimal() {
         setTimeout(() =>{
             decimal.style.backgroundColor = "rgba(255, 255, 255, 1)"
         }, 150)
-        let firstDec = -1, secondDec = -1
-        if(Current.innerText.indexOf('.') == Current.innerText.length-1) return
-        if(Current.innerText == '') return ;
-        if(Operationcheck() == 'NoOperate')
+        if(Switch_Mode.innerText == 'CACULATOR')
         {
-            console.log(Current.innerText.indexOf('.'))
-            if(Current.innerText.indexOf('.') != -1) return
+            let firstDec = -1, secondDec = -1
+            if(Current.innerText.indexOf('.') == Current.innerText.length-1) return
+            if(Current.innerText == '') return ;
+            if(Operationcheck() == 'NoOperate')
+            {
+                console.log(Current.innerText.indexOf('.'))
+                if(Current.innerText.indexOf('.') != -1) return
+            }
+            // find the first decimal, if click deciaml again ('..') block
+            // find the first decimal, then find another then block clicking
+            if(Current.innerText.indexOf('.') != -1) firstDec = Current.innerText.indexOf('.')
+            if(firstDec != -1)
+            {
+                if(Current.innerText.indexOf('.', firstDec+1) != -1) secondDec = Current.innerText.indexOf('.', firstDec+1)
+            }
+            if(firstDec != -1 && secondDec != -1) return
+            else Current.innerText = Current.innerText + decimal.innerText;
         }
-        // find the first decimal, if click deciaml again ('..') block
-        // find the first decimal, then find another then block clicking
-        if(Current.innerText.indexOf('.') != -1) firstDec = Current.innerText.indexOf('.')
-        if(firstDec != -1)
-        {
-            if(Current.innerText.indexOf('.', firstDec+1) != -1) secondDec = Current.innerText.indexOf('.', firstDec+1)
-        }
-        if(firstDec != -1 && secondDec != -1) return
-        else Current.innerText = Current.innerText + decimal.innerText;
+        else Input_Box[0].value += decimal.innerText
     })
 }
 function Negative() {
     negative_input.addEventListener('click', () => {
-        negative_input.style.backgroundColor = "rgba(13, 235, 235, 1)"
-        setTimeout(() =>{
-            negative_input.style.backgroundColor = "rgba(255, 255, 255, 1)"
-        }, 150)
-        if(Current.innerText == '') Current.innerText = Current.innerText + '-'
+        if(Switch_Mode.innerText == 'CACULATOR')
+        {
+            negative_input.style.backgroundColor = "rgba(13, 235, 235, 1)"
+            setTimeout(() =>{
+                negative_input.style.backgroundColor = "rgba(255, 255, 255, 1)"
+            }, 150)
+            if(Current.innerText == '') Current.innerText = Current.innerText + '-'
+        }
     })
 }
 function Getoperate() {
     oparate_input.forEach(button =>{
-        button.addEventListener('click', () =>{
-            button.style.backgroundColor = "rgba(13, 235, 235, 1)"
-            setTimeout(() =>{
-                button.style.backgroundColor = "rgba(255, 255, 255, 1)"
-            }, 150)
-            let Check = document.querySelector('.Current').innerText;
-            if(Check == '') return
-            if(Check == '-') return
-            if(Check.indexOf('+',1) != -1) Equal_button.click()
-            if(Check.indexOf('-',1) != -1) Equal_button.click()
-            if(Check.indexOf('x',1) != -1) Equal_button.click()
-            if(Check.indexOf('/',1) != -1) Equal_button.click()
-            else Current.innerText =  Current.innerText + button.innerText;
-        })
+        if(Switch_Mode.innerText == 'CACULATOR')
+        {
+            button.addEventListener('click', () =>{
+                button.style.backgroundColor = "rgba(13, 235, 235, 1)"
+                setTimeout(() =>{
+                    button.style.backgroundColor = "rgba(255, 255, 255, 1)"
+                }, 150)
+                let Check = document.querySelector('.Current').innerText;
+                if(Check == '') return
+                if(Check == '-') return
+                if(Check.indexOf('+',1) != -1) Equal_button.click()
+                if(Check.indexOf('-',1) != -1) Equal_button.click()
+                if(Check.indexOf('x',1) != -1) Equal_button.click()
+                if(Check.indexOf('/',1) != -1) Equal_button.click()
+                else Current.innerText =  Current.innerText + button.innerText;
+            })  
+        }
     })
 }
 function Operationcheck() {
@@ -134,54 +156,57 @@ function ClearHistory() {
 }
 function Result() {
     Equal_button.addEventListener('click', ()=>{
-        Equal_button.style.backgroundColor = "#34eb4c"
-        setTimeout(() =>{
-            Equal_button.style.backgroundColor = "rgba(255, 255, 255, 1)"
-        }, 300)
-        let CurrentString = Current.innerText
-        if(CurrentString == Previous.innerText) return
-        let temp1, temp2 // create 2 temp and convert to string later
-        let number1 = 0, number2 = 0
-        // Check operation + - x / //
-        let operate = Operationcheck()
-        console.log(operate)
-        if(operate == 'NoOperate')
+        if(Switch_Mode.innerText == 'CACULATOR')
         {
-            temp1 = CurrentString ; number1 = parseFloat(temp1); console.log(number1)
+            Equal_button.style.backgroundColor = "#34eb4c"
+            setTimeout(() =>{
+                Equal_button.style.backgroundColor = "rgba(255, 255, 255, 1)"
+            }, 300)
+            let CurrentString = Current.innerText
+            if(CurrentString == Previous.innerText) return
+            let temp1, temp2 // create 2 temp and convert to string later
+            let number1 = 0, number2 = 0
+            // Check operation + - x / //
+            let operate = Operationcheck()
+            console.log(operate)
+            if(operate == 'NoOperate')
+            {
+                temp1 = CurrentString ; number1 = parseFloat(temp1); console.log(number1)
+            }
+            else
+            {
+                let operate_index = CurrentString.indexOf(operate,1)
+                console.log(operate_index)
+                temp1 = CurrentString.slice(0, operate_index) ; console.log(temp1)
+                temp2 = CurrentString.slice(operate_index + 1, CurrentString.length) ; console.log(temp2)
+                number1 = parseFloat(temp1) ; console.log(number1)
+                number2 = parseFloat(temp2) ; console.log(number2)
+            }
+            switch (operate) {
+                case '+': if(isNaN(number2)) Current.innerText = number1
+                else Current.innerText = number1 + number2
+                    break;
+                case '-': if(isNaN(number2)) Current.innerText = number1
+                else Current.innerText = number1 - number2
+                    break;
+                case 'x': if(isNaN(number2)) Current.innerText = number1
+                else Current.innerText = number1 * number2
+                    break;
+                case '/': if(isNaN(number2)) Current.innerText = number1
+                else Current.innerText = number1 / number2
+                    break;
+                default:
+                    if(CurrentString.indexOf('.') == CurrentString.length-1) Current.innerText = Current.innerText.slice(0, Current.innerText.length-1)
+                    break;
+            }
+            console.log(Current.innerText)
+            if(isNaN(number2) || operate == 'NoOperate') Previous.innerText = temp1
+            else Previous.innerText = temp1 + operate + temp2
+            // Save result to History
+            let history_temp = document.createElement("p");
+            history_temp.innerText = Previous.innerText + ' = ' + Current.innerText ; console.log(history_temp)
+            Main_History.appendChild(history_temp) 
         }
-        else
-        {
-            let operate_index = CurrentString.indexOf(operate,1)
-            console.log(operate_index)
-            temp1 = CurrentString.slice(0, operate_index) ; console.log(temp1)
-            temp2 = CurrentString.slice(operate_index + 1, CurrentString.length) ; console.log(temp2)
-            number1 = parseFloat(temp1) ; console.log(number1)
-            number2 = parseFloat(temp2) ; console.log(number2)
-        }
-        switch (operate) {
-            case '+': if(isNaN(number2)) Current.innerText = number1
-            else Current.innerText = number1 + number2
-                break;
-            case '-': if(isNaN(number2)) Current.innerText = number1
-            else Current.innerText = number1 - number2
-                break;
-            case 'x': if(isNaN(number2)) Current.innerText = number1
-            else Current.innerText = number1 * number2
-                break;
-            case '/': if(isNaN(number2)) Current.innerText = number1
-            else Current.innerText = number1 / number2
-                break;
-            default:
-                if(CurrentString.indexOf('.') == CurrentString.length-1) Current.innerText = Current.innerText.slice(0, Current.innerText.length-1)
-                break;
-        }
-        console.log(Current.innerText)
-        if(isNaN(number2) || operate == 'NoOperate') Previous.innerText = temp1
-        else Previous.innerText = temp1 + operate + temp2
-        // Save result to History
-        let history_temp = document.createElement("p");
-        history_temp.innerText = Previous.innerText + ' = ' + Current.innerText ; console.log(history_temp)
-        Main_History.appendChild(history_temp)
     })
 }
 function ClearAll() {
@@ -200,7 +225,8 @@ function Delete() {
         setTimeout(() =>{
             delete_button.style.backgroundColor = "rgba(255, 255, 255, 1)"
         }, 300)
-        Current.innerText = Current.innerText.slice(0, Current.innerText.length-1)
+        if(Switch_Mode.innerText == 'CACULATOR') Current.innerText = Current.innerText.slice(0, Current.innerText.length-1)
+        else Input_Box[0].value = Input_Box[0].value.slice(0, Input_Box[0].value.length-1)
     })
 }
 function Keyboard() {
@@ -210,6 +236,7 @@ function Keyboard() {
         else
         {
             switch (e.key) {
+                case 's': Switch_Mode.click() ; break;
                 case '=': Equal_button.click() ; break;
                 case 'Enter': Equal_button.click() ; break;
                 case '1': number_input[0].click() ; break;
@@ -239,8 +266,96 @@ function Keyboard() {
         }
     })
 }
+function switchmode() { // Some Stupid code Bro
+    Switch_Mode.addEventListener('click', () =>{
+        if(Switch_Mode.innerText == 'CACULATOR')
+        {
+            Input_Box.forEach(box =>{
+                box.style.display = 'block'
+            })
+            Switch_Mode.innerText = 'CURRENCY EXCHANGE'
+            Currency.forEach(button =>{
+                button.style.display = 'block'
+            })
+            number_input[0].style.order = '1'
+            number_input[1].style.order = '2'
+            number_input[2].style.order = '3'
+            number_input[3].style.order = '5'
+            number_input[4].style.order = '6'
+            number_input[5].style.order = '7'
+            number_input[6].style.order = '9'
+            number_input[7].style.order = '10'
+            number_input[8].style.order = '11'
+            number_input[9].style.order = '13'
+            clear_all_button.style.order = '4'
+            delete_button.style.order = '8'
+            decimal.style.order = '12'
+            Equal_button.style.order = '14'
+            Equal_button.style.width = '225px'
+            negative_input.style.display = 'none'
+            Process_Div.style.height = '235px'
+            Result_Div.style.height = '235px'
+            oparate_input.forEach(button =>{
+                button.style.display = 'none'
+            })
+            Result_Div.style.display = 'space-around'
+            Previous.style.display = 'none'
+            Current.style.display = 'none'
+            Top.style.display = 'flex'
+            Bottom.style.display ='flex'
+            Top.style.marginBottom = '50px'
+            Bottom.style.marginBottom = '50px'
+        }
+        else
+        {
+            Switch_Mode.innerText = 'CACULATOR'
+            Input_Box.forEach(box =>{
+                box.style.display = 'none'
+            })
+            Currency.forEach(button =>{
+                button.style.display = 'none'
+            })
+            negative_input.style.display = 'block'
+            oparate_input.forEach(button =>{
+                button.style.display = 'block'
+            })
+            negative_input.style.order = '1'
+            clear_all_button.style.order = '2'
+            delete_button.style.order = '3'
+            oparate_input[0].style.order = '4'
+            oparate_input[1].style.order = '8'
+            oparate_input[2].style.order = '12'
+            oparate_input[3].style.order = '16'
+            decimal.style.order = '17'
+            number_input[0].style.order = '5'
+            number_input[1].style.order = '6'
+            number_input[2].style.order = '7'
+            number_input[3].style.order = '9'
+            number_input[4].style.order = '10'
+            number_input[5].style.order = '11'
+            number_input[6].style.order = '13'
+            number_input[7].style.order = '14'
+            number_input[8].style.order = '15'
+            number_input[9].style.order = '19'
+            Equal_button.style.order = '20'
+            Equal_button.style.width = '150px'
+            Process_Div.style.height = '300px'
+            Result_Div.style.height = '170px'
+            Result_Div.style.justifyContent = 'space-between'
+            Previous.style.display = 'block'
+            Current.style.display = 'block'
+            Top.style.display = 'block'
+            Bottom.style.display ='block'
+            Top.style.marginBottom = '0px'
+            Bottom.style.marginBottom = '0px'
+        }
+    })
+}
 function main() {
     Process_Div.style.display = 'flex' // Fix first click on History
+    Currency.forEach(button =>{
+        button.style.display = 'none'
+    })
     Keyboard()
     CreateHistory()
     ClearHistory()
@@ -251,5 +366,6 @@ function main() {
     ClearAll()
     Result()
     Delete()
+    switchmode()
 }
 main()

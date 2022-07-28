@@ -33,7 +33,7 @@ body
 }
 .History-Button > #Title
 {
-    pointer-events: none;
+    cursor: pointer;;
     font-size: large;
 }
 svg
@@ -85,6 +85,31 @@ svg
 .Result > .Current
 {
     font-size: 30px;
+}
+.Top, .Bottom
+{
+    /* margin-bottom: 50px; */
+    width: inherit;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.Top
+{
+    margin-top: 50px;
+}
+input
+{
+    font-size: 17px;
+    display: none;
+    width: 200px;
+    height: 50px;
+}
+select
+{
+    font-size: 17px;
+    height: 55px;
 }
 #Main-Process
 {

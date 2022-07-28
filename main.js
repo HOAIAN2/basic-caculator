@@ -33,7 +33,7 @@ function Getnumbers() {
                 if(Current.innerText == '0') return
                 Current.innerText = Current.innerText + button.innerText;
             }
-            else Input_Box[0].focus()
+            else Input_Box[0].value += button.innerText
         })
     })
 }
@@ -63,7 +63,7 @@ function Decimal() {
             if(firstDec != -1 && secondDec != -1) return
             else Current.innerText = Current.innerText + decimal.innerText;
         }
-        else Input_Box[0].focus()
+        else Input_Box[0].value += decimal.innerText
     })
 }
 function Negative() {

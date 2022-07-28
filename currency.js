@@ -6,6 +6,7 @@ const Input_Top = document.querySelector('#Exchange1')
 const Input_Bottom = document.querySelector('#Exchange2')
 const Main_History_2 = document.querySelector('#History-Bar')
 const Clear_Button = document.querySelector('.Clear-All')
+let CheckLoop
 async function GetAPIData(url){
     const response = await fetch(url);
     var data = await response.json(); console.log(data);
@@ -52,6 +53,8 @@ async function GetAPIData(url){
             Input_Bottom.value = Check
             let history_temp = document.createElement("p");
             history_temp.innerText = Input_Top.value + ' ' + Currency1.value + ' = ' + Input_Bottom.value + ' ' + Currency2.value;
+            if(CheckLoop == history_temp.innerText) return
+            CheckLoop = history_temp.innerText ; console.log(CheckLoop)
             Main_History_2.appendChild(history_temp) 
         }
     }

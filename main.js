@@ -85,7 +85,6 @@ function Getoperate() {
 }
 function Operationcheck() {
     let Check = Current.innerText
-    let operate_index
     if (Check.indexOf('+', 1) != -1) return '+'
     else {
         if (Check.indexOf('-', 1) != -1) return '-'
@@ -98,7 +97,7 @@ function Operationcheck() {
         }
     }
 }
-function CreateHistory() {
+function HistoryPage() {
     history_button.addEventListener('click', () => { // Lmao code only run at the second click
         if (Process_Div.style.display == 'flex') {
             setTimeout(() => {
@@ -336,44 +335,50 @@ function switchmode() { // Some Stupid code Bro
     })
 }
 function AnimationButtons() {
-    let animationtime = 250
+    const animationtime = 250
+    const ColorBlue = 'rgb(13, 235, 235)'
+    const ColorWhite = 'rgba(255, 255, 255, 1)'
+    const ColorGreen = 'rgb(122, 235, 8)'
+    const ColorYellow = 'rgb(255, 215, 0)'
+    const ColorGray = 'rgb(250, 250, 250)'
+    const ColorRed = 'rgb(219, 7, 7)'
     All_buttons.forEach(button => {
         button.addEventListener('mouseenter', () => {
-            button.style.backgroundColor = 'rgb(13, 235, 235)'
+            button.style.backgroundColor = ColorBlue
         })
         button.addEventListener('mouseleave', () => {
-            if (button.innerText == '1' || button.innerText == '2' || button.innerText == '3' || button.innerText == '4' || button.innerText == '5' || button.innerText == '6' || button.innerText == '7' || button.innerText == '8' || button.innerText == '9' || button.innerText == '0') button.style.backgroundColor = 'rgb(250, 250, 250)'
-            else button.style.backgroundColor = 'rgba(255, 255, 255, 1)'
+            if (button.innerText == '1' || button.innerText == '2' || button.innerText == '3' || button.innerText == '4' || button.innerText == '5' || button.innerText == '6' || button.innerText == '7' || button.innerText == '8' || button.innerText == '9' || button.innerText == '0') button.style.backgroundColor = ColorGray
+            else button.style.backgroundColor = ColorWhite
         })
         button.addEventListener('click', () => {
             if (button.innerText == '=') {
-                button.style.backgroundColor = 'rgb(122, 235, 8)'
+                button.style.backgroundColor = ColorGreen
                 setTimeout(() => {
-                    button.style.backgroundColor = 'rgba(255, 255, 255, 1)'
+                    button.style.backgroundColor = ColorWhite
                 }, animationtime)
             }
             if (button.innerText == 'Delete') {
-                button.style.backgroundColor = 'rgb(255, 215, 0)'
+                button.style.backgroundColor = ColorYellow
                 setTimeout(() => {
-                    button.style.backgroundColor = 'rgba(255, 255, 255, 1)'
+                    button.style.backgroundColor = ColorWhite
                 }, animationtime)
             }
             if (button.innerText == 'AC') {
-                button.style.backgroundColor = 'rgb(219, 7, 7)'
+                button.style.backgroundColor = ColorRed
                 setTimeout(() => {
-                    button.style.backgroundColor = 'rgba(255, 255, 255, 1)'
+                    button.style.backgroundColor = ColorWhite
                 }, animationtime)
             }
             if (button.innerText == '1' || button.innerText == '2' || button.innerText == '3' || button.innerText == '4' || button.innerText == '5' || button.innerText == '6' || button.innerText == '7' || button.innerText == '8' || button.innerText == '9' || button.innerText == '0') {
-                button.style.backgroundColor = 'rgb(13, 235, 235)'
+                button.style.backgroundColor = ColorBlue
                 setTimeout(() => {
-                    button.style.backgroundColor = 'rgb(250, 250, 250)'
+                    button.style.backgroundColor = ColorGray
                 }, animationtime)
             }
             if (button.innerText == '+' || button.innerText == '-' || button.innerText == 'x' || button.innerText == '/' || button.innerText == '.' || button.innerText == '+/-') {
-                button.style.backgroundColor = 'rgb(12, 235, 235)'
+                button.style.backgroundColor = ColorBlue
                 setTimeout(() => {
-                    button.style.backgroundColor = 'rgba(255, 255 , 255, 1)'
+                    button.style.backgroundColor = ColorWhite
                 }, animationtime)
             }
         })
@@ -385,7 +390,7 @@ function main() {
         button.style.display = 'none'
     })
     Keyboard()
-    CreateHistory()
+    HistoryPage()
     ClearHistory()
     Getnumbers()
     Decimal()

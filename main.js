@@ -43,7 +43,6 @@ function Decimal() {
             if (Current.innerText.indexOf('.') == Current.innerText.length - 1) return
             if (Current.innerText == '') return;
             if (Operationcheck() == 'NoOperate') {
-                console.log(Current.innerText.indexOf('.'))
                 if (Current.innerText.indexOf('.') != -1) return
             }
             // find the first decimal, if click deciaml again ('..') block
@@ -101,7 +100,6 @@ function Operationcheck() {
 }
 function CreateHistory() {
     history_button.addEventListener('click', () => { // Lmao code only run at the second click
-        console.log('click', ' ', Process_Div.style.display)
         if (Process_Div.style.display == 'flex') {
             setTimeout(() => {
                 Process_Div.style.display = 'none'
@@ -144,17 +142,15 @@ function Result() {
             let number1 = 0, number2 = 0
             // Check operation + - x / //
             let operate = Operationcheck()
-            console.log(operate)
             if (operate == 'NoOperate') {
-                temp1 = CurrentString; number1 = parseFloat(temp1); console.log(number1)
+                temp1 = CurrentString; number1 = parseFloat(temp1)
             }
             else {
                 let operate_index = CurrentString.indexOf(operate, 1)
-                console.log(operate_index)
-                temp1 = CurrentString.slice(0, operate_index); console.log(temp1)
-                temp2 = CurrentString.slice(operate_index + 1, CurrentString.length); console.log(temp2)
-                number1 = parseFloat(temp1); console.log(number1)
-                number2 = parseFloat(temp2); console.log(number2)
+                temp1 = CurrentString.slice(0, operate_index)
+                temp2 = CurrentString.slice(operate_index + 1, CurrentString.length)
+                number1 = parseFloat(temp1)
+                number2 = parseFloat(temp2)
             }
             // Fix Floating Point number
             let a = 1, b = 1, biggerfloat, Fixed
@@ -165,8 +161,7 @@ function Result() {
                     a = a * 10
                 }
             }
-            if(!isNaN(number2))
-            {
+            if (!isNaN(number2)) {
                 if (isFloat(number2)) {
                     b = 1
                     while (isFloat(number2)) {
@@ -205,7 +200,7 @@ function Result() {
             else Previous.innerText = temp1 + operate + temp2
             // Save result to History
             let history_temp = document.createElement("p");
-            history_temp.innerText = Previous.innerText + ' = ' + Current.innerText; console.log(history_temp)
+            history_temp.innerText = Previous.innerText + ' = ' + Current.innerText
             Main_History.appendChild(history_temp)
         }
     })
@@ -224,7 +219,6 @@ function Delete() {
 }
 function Keyboard() {
     window.addEventListener('keydown', (e) => {
-        console.log(e.key)
         if (e.key == 'Delete' && e.repeat == true) clear_all_button.click()
         else {
             switch (e.key) {

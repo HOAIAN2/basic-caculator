@@ -11,7 +11,7 @@ let CheckLoop
 async function GetAPIData(url) {
     try {
         const response = await fetch(url);
-        var data = await response.json(); console.log(data);
+        var data = await response.json()
         Title.setAttribute('title', `Tỉ giá được cập nhật bởi https://exchangerate.host vào lúc ${data.date}`)
     } catch (error) {
         alert('Tính năng chuyển đổi tiền hệ hiện không hoạt động do lỗi kết nối với hệ thống')
@@ -49,7 +49,6 @@ async function GetAPIData(url) {
                     if (Currency2.value == key) Rate2 = RateData[key]
                 }
                 RealRate = Rate2 / Rate1
-                console.log(Input_Top.value)
                 Check = RealRate * Input_Top.value
                 if (isNaN(Check)) Input_Bottom.value = 'Vui lòng nhập số hợp lệ'
                 else {
@@ -57,7 +56,7 @@ async function GetAPIData(url) {
                     let history_temp = document.createElement("p");
                     history_temp.innerText = Input_Top.value + ' ' + Currency1.value + ' = ' + Input_Bottom.value + ' ' + Currency2.value;
                     if (CheckLoop == history_temp.innerText) return
-                    CheckLoop = history_temp.innerText; console.log(CheckLoop)
+                    CheckLoop = history_temp.innerText
                     Main_History_2.appendChild(history_temp)
                 }
             }

@@ -78,6 +78,10 @@ svg
 {
     display: none;
 }
+select::-webkit-scrollbar
+{
+    display: none;
+}
 .Result > .Previous
 {
     font-size: 20px;

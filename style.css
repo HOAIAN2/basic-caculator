@@ -88,7 +88,6 @@ svg
 }
 .Top, .Bottom
 {
-    /* margin-bottom: 50px; */
     width: inherit;
     display: flex;
     flex-direction: row;
@@ -140,16 +139,4 @@ button:last-child
 .Number
 {
     background-color: rgb(250, 250, 250);
-}
-.Equal:active
-{
-    background-color: rgb(122, 235, 8);
-}
-.Clear-All:active
-{
-    background-color: rgb(219, 7, 7);
-}
-.Delete:active
-{
-    background-color: gold;
 }

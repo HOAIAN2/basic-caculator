@@ -139,6 +139,7 @@ function Result() {
         if (Switch_Mode.innerText == 'CACULATOR') {
             let CurrentString = Current.innerText
             if (CurrentString == Previous.innerText) return
+            if (CurrentString == '-') return
             let temp1, temp2 // create 2 temp and convert to string later
             let number1 = 0, number2 = 0
             // Check operation + - x / //
@@ -164,20 +165,23 @@ function Result() {
                     a = a * 10
                 }
             }
-            if (isFloat(number2)) {
-                b = 1
-                while (isFloat(number2)) {
-                    number2 = number2 * 10
-                    b = b * 10
+            if(!isNaN(number2))
+            {
+                if (isFloat(number2)) {
+                    b = 1
+                    while (isFloat(number2)) {
+                        number2 = number2 * 10
+                        b = b * 10
+                    }
                 }
-            }
-            if (a > b) {
-                biggerfloat = a
-                number2 = number2 * (a / b)
-            }
-            if (b > a) {
-                biggerfloat = b
-                number1 = number1 * (b / a)
+                if (a > b) {
+                    biggerfloat = a
+                    number2 = number2 * (a / b)
+                }
+                if (b > a) {
+                    biggerfloat = b
+                    number1 = number1 * (b / a)
+                }
             }
             else biggerfloat = a
             switch (operate) {

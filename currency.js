@@ -1,5 +1,4 @@
 const APIURL = 'https://api.exchangerate.host/latest'
-let EUR, USD, VND, JPY, WON
 const Currency1 = document.querySelector('#CRC1')
 const Currency2 = document.querySelector('#CRC2')
 const Input_Top = document.querySelector('#Exchange1')
@@ -38,7 +37,7 @@ async function GetAPIData(url) {
     }
     CreateElement()
     function ComfirmExchange() {
-        let Comfirm = document.querySelector('.Equal')
+        const Comfirm = document.querySelector('.Equal')
         Comfirm.addEventListener('click', () => {
             if (Switch_Mode.innerText == 'CURRENCY EXCHANGE') {
                 let Rate1, Rate2

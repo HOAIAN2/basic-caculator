@@ -23,7 +23,6 @@ function Getnumbers() {
     number_input.forEach(button => {
         button.addEventListener('click', () => {
             if (Switch_Mode.innerText == 'CACULATOR') {
-                let NoClick = number_input[10]
                 let block_index
                 if (Operationcheck() != 'NoOperate') block_index = Current.innerText.indexOf(Operationcheck());
                 if (Current.innerText.indexOf('0', block_index) == block_index + 1) {

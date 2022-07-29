@@ -13,7 +13,7 @@ const delete_button = document.querySelector('.Delete')
 const Equal_button = document.querySelector('.Equal')
 const Previous = document.querySelector('.Previous')
 const Current = document.querySelector('.Current')
-const Run = document.querySelectorAll('button')
+const All_buttons = document.querySelectorAll('button')
 const Switch_Mode = document.querySelector('#Title')
 const Currency = document.querySelectorAll('select')
 const Input_Box = document.querySelectorAll('input')
@@ -56,7 +56,11 @@ function Decimal() {
             if (firstDec != -1 && secondDec != -1) return
             else Current.innerText = Current.innerText + decimal.innerText;
         }
-        else Input_Box[0].value += decimal.innerText
+        else
+        {
+            if(Input_Box[0].value.indexOf('.') == -1) Input_Box[0].value += decimal.innerText
+            else return
+        }
     })
 }
 function Negative() {
@@ -307,6 +311,55 @@ function switchmode() { // Some Stupid code Bro
         }
     })
 }
+function AnimationButtons(){
+    let animationtime = 250
+    All_buttons.forEach(button =>{
+        button.addEventListener('mouseenter', ()=>{
+            button.style.backgroundColor = 'rgb(13, 235, 235)'
+        })
+        button.addEventListener('mouseleave', ()=>{
+            if(button.innerText == '1' || button.innerText == '2' || button.innerText == '3' || button.innerText == '4' || button.innerText == '5' || button.innerText == '6' || button.innerText == '7' || button.innerText == '8' || button.innerText == '9' || button.innerText == '0') button.style.backgroundColor = 'rgb(250, 250, 250)'
+            else button.style.backgroundColor = 'rgba(255, 255, 255, 1)'
+        })
+        button.addEventListener('click', ()=>{
+            if(button.innerText == '=')
+            {
+                button.style.backgroundColor = 'rgb(122, 235, 8)'
+                setTimeout(()=>{
+                    button.style.backgroundColor = 'rgba(255, 255, 255, 1)'
+                },animationtime)
+            }
+            if(button.innerText == 'Delete')
+            {
+                button.style.backgroundColor = 'rgb(255, 215, 0)'
+                setTimeout(()=>{
+                    button.style.backgroundColor = 'rgba(255, 255, 255, 1)'
+                },animationtime)
+            }
+            if(button.innerText == 'AC')
+            {
+                button.style.backgroundColor = 'rgb(219, 7, 7)'
+                setTimeout(()=>{
+                    button.style.backgroundColor = 'rgba(255, 255, 255, 1)'
+                },animationtime)
+            }
+            if(button.innerText == '1' || button.innerText == '2' || button.innerText == '3' || button.innerText == '4' || button.innerText == '5' || button.innerText == '6' || button.innerText == '7' || button.innerText == '8' || button.innerText == '9' || button.innerText == '0')
+            {
+                button.style.backgroundColor = 'rgb(13, 235, 235)'
+                setTimeout(()=>{
+                    button.style.backgroundColor = 'rgb(250, 250, 250)'
+                },animationtime)
+            }
+            if(button.innerText == '+' || button.innerText == '-' || button.innerText == 'x' || button.innerText == '/' || button.innerText == '.' || button.innerText == '+/-')
+            {
+                button.style.backgroundColor = 'rgb(12, 235, 235)'
+                setTimeout(()=>{
+                    button.style.backgroundColor = 'rgba(255, 255 , 255, 1)'
+                },animationtime)
+            }
+        })
+    })
+}
 function main() {
     Process_Div.style.display = 'flex' // Fix first click on History
     Currency.forEach(button => {
@@ -323,5 +376,6 @@ function main() {
     Result()
     Delete()
     switchmode()
+    AnimationButtons()
 }
 main()

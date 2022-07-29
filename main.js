@@ -153,13 +153,14 @@ function Result() {
                 number2 = parseFloat(temp2)
             }
             // Fix Floating Point number
-            let a = 1, b = 1, biggerfloat, Fixed
+            let a = 1, b = 1, biggerfloat=1, Fixed
             if (isFloat(number1)) {
                 a = 1
                 while (isFloat(number1)) {
                     number1 = number1 * 10
                     a = a * 10
                 }
+                biggerfloat = a
             }
             if (!isNaN(number2)) {
                 if (isFloat(number2)) {
@@ -178,7 +179,6 @@ function Result() {
                     number1 = number1 * (b / a)
                 }
             }
-            else biggerfloat = a
             switch (operate) {
                 case '+': if (isNaN(number2)) Fixed = number1 / biggerfloat
                 else Fixed = (number1 + number2) / biggerfloat

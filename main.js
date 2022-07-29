@@ -56,9 +56,8 @@ function Decimal() {
             if (firstDec != -1 && secondDec != -1) return
             else Current.innerText = Current.innerText + decimal.innerText;
         }
-        else
-        {
-            if(Input_Box[0].value.indexOf('.') == -1) Input_Box[0].value += decimal.innerText
+        else {
+            if (Input_Box[0].value.indexOf('.') == -1) Input_Box[0].value += decimal.innerText
             else return
         }
     })
@@ -132,6 +131,10 @@ function ClearHistory() {
         }
     })
 }
+function isFloat(number) {
+    if (number % 1 != 0) return true
+    else return false
+}
 function Result() {
     Equal_button.addEventListener('click', () => {
         if (Switch_Mode.innerText == 'CACULATOR') {
@@ -153,25 +156,49 @@ function Result() {
                 number1 = parseFloat(temp1); console.log(number1)
                 number2 = parseFloat(temp2); console.log(number2)
             }
+            // Fix Floating Point number
+            let a = 1, b = 1, biggerfloat, Fixed
+            if (isFloat(number1)) {
+                a = 1
+                while (isFloat(number1)) {
+                    number1 = number1 * 10
+                    a = a * 10
+                }
+            }
+            if (isFloat(number2)) {
+                b = 1
+                while (isFloat(number2)) {
+                    number2 = number2 * 10
+                    b = b * 10
+                }
+            }
+            if (a > b) {
+                biggerfloat = a
+                number2 = number2 * (a / b)
+            }
+            if (b > a) {
+                biggerfloat = b
+                number1 = number1 * (b / a)
+            }
+            else biggerfloat = a
             switch (operate) {
-                case '+': if (isNaN(number2)) Current.innerText = number1
-                else Current.innerText = number1 + number2
+                case '+': if (isNaN(number2)) Fixed = number1 / biggerfloat
+                else Fixed = (number1 + number2) / biggerfloat
                     break;
-                case '-': if (isNaN(number2)) Current.innerText = number1
-                else Current.innerText = number1 - number2
+                case '-': if (isNaN(number2)) Fixed = number1 / biggerfloat
+                else Fixed = (number1 - number2) / biggerfloat
                     break;
-                case 'x': if (isNaN(number2)) Current.innerText = number1
-                else Current.innerText = number1 * number2
+                case 'x': if (isNaN(number2)) Fixed = number1 / biggerfloat
+                else Fixed = (number1 * number2) / biggerfloat
                     break;
-                case '/': if (isNaN(number2)) Current.innerText = number1
-                else Current.innerText = number1 / number2
+                case '/': if (isNaN(number2)) Fixed = number1 / biggerfloat
+                else Fixed = (number1 / number2) / biggerfloat
                     break;
-                default:
-                    if (CurrentString.indexOf('.') == CurrentString.length - 1) Current.innerText = Current.innerText.slice(0, Current.innerText.length - 1)
+                default: Fixed = number1 / biggerfloat
                     break;
             }
-            console.log(Current.innerText)
-            if (isNaN(number2) || operate == 'NoOperate') Previous.innerText = temp1
+            Current.innerText = Fixed
+            if (isNaN(number2) || operate == 'NoOperate') Previous.innerText = Current.innerText
             else Previous.innerText = temp1 + operate + temp2
             // Save result to History
             let history_temp = document.createElement("p");
@@ -311,51 +338,46 @@ function switchmode() { // Some Stupid code Bro
         }
     })
 }
-function AnimationButtons(){
+function AnimationButtons() {
     let animationtime = 250
-    All_buttons.forEach(button =>{
-        button.addEventListener('mouseenter', ()=>{
+    All_buttons.forEach(button => {
+        button.addEventListener('mouseenter', () => {
             button.style.backgroundColor = 'rgb(13, 235, 235)'
         })
-        button.addEventListener('mouseleave', ()=>{
-            if(button.innerText == '1' || button.innerText == '2' || button.innerText == '3' || button.innerText == '4' || button.innerText == '5' || button.innerText == '6' || button.innerText == '7' || button.innerText == '8' || button.innerText == '9' || button.innerText == '0') button.style.backgroundColor = 'rgb(250, 250, 250)'
+        button.addEventListener('mouseleave', () => {
+            if (button.innerText == '1' || button.innerText == '2' || button.innerText == '3' || button.innerText == '4' || button.innerText == '5' || button.innerText == '6' || button.innerText == '7' || button.innerText == '8' || button.innerText == '9' || button.innerText == '0') button.style.backgroundColor = 'rgb(250, 250, 250)'
             else button.style.backgroundColor = 'rgba(255, 255, 255, 1)'
         })
-        button.addEventListener('click', ()=>{
-            if(button.innerText == '=')
-            {
+        button.addEventListener('click', () => {
+            if (button.innerText == '=') {
                 button.style.backgroundColor = 'rgb(122, 235, 8)'
-                setTimeout(()=>{
+                setTimeout(() => {
                     button.style.backgroundColor = 'rgba(255, 255, 255, 1)'
-                },animationtime)
+                }, animationtime)
             }
-            if(button.innerText == 'Delete')
-            {
+            if (button.innerText == 'Delete') {
                 button.style.backgroundColor = 'rgb(255, 215, 0)'
-                setTimeout(()=>{
+                setTimeout(() => {
                     button.style.backgroundColor = 'rgba(255, 255, 255, 1)'
-                },animationtime)
+                }, animationtime)
             }
-            if(button.innerText == 'AC')
-            {
+            if (button.innerText == 'AC') {
                 button.style.backgroundColor = 'rgb(219, 7, 7)'
-                setTimeout(()=>{
+                setTimeout(() => {
                     button.style.backgroundColor = 'rgba(255, 255, 255, 1)'
-                },animationtime)
+                }, animationtime)
             }
-            if(button.innerText == '1' || button.innerText == '2' || button.innerText == '3' || button.innerText == '4' || button.innerText == '5' || button.innerText == '6' || button.innerText == '7' || button.innerText == '8' || button.innerText == '9' || button.innerText == '0')
-            {
+            if (button.innerText == '1' || button.innerText == '2' || button.innerText == '3' || button.innerText == '4' || button.innerText == '5' || button.innerText == '6' || button.innerText == '7' || button.innerText == '8' || button.innerText == '9' || button.innerText == '0') {
                 button.style.backgroundColor = 'rgb(13, 235, 235)'
-                setTimeout(()=>{
+                setTimeout(() => {
                     button.style.backgroundColor = 'rgb(250, 250, 250)'
-                },animationtime)
+                }, animationtime)
             }
-            if(button.innerText == '+' || button.innerText == '-' || button.innerText == 'x' || button.innerText == '/' || button.innerText == '.' || button.innerText == '+/-')
-            {
+            if (button.innerText == '+' || button.innerText == '-' || button.innerText == 'x' || button.innerText == '/' || button.innerText == '.' || button.innerText == '+/-') {
                 button.style.backgroundColor = 'rgb(12, 235, 235)'
-                setTimeout(()=>{
+                setTimeout(() => {
                     button.style.backgroundColor = 'rgba(255, 255 , 255, 1)'
-                },animationtime)
+                }, animationtime)
             }
         })
     })

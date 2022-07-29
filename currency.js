@@ -6,20 +6,35 @@ const Input_Top = document.querySelector('#Exchange1')
 const Input_Bottom = document.querySelector('#Exchange2')
 const Main_History_2 = document.querySelector('#History-Bar')
 const Clear_Button = document.querySelector('.Clear-All')
+const Title = document.querySelector('#Title')
 let CheckLoop
 async function GetAPIData(url){
     const response = await fetch(url);
     var data = await response.json(); console.log(data);
-    EUR = 1 ;
-    USD = data.rates.USD ; console.log(USD)
-    VND = data.rates.VND ; console.log(VND)
-    JPY = data.rates.JPY ; console.log(JPY)
-    WON = data.rates.KRW ; console.log(WON)
+    Title.setAttribute('title', `Tỉ giá được cập nhật bởi https://exchangerate.host vào lúc ${data.date}`)
+    let RateData = data.rates
     /*
     Example : Base Currency is EUR
     VND/JPY = JPY rate(EUR) / VND rate(EUR)
     Serious Series - Serious Coding
     */
+   function CreateElement() {
+    for (const key in RateData) {
+        if(key != 'USD' || key != 'EUR' || key != 'VND' || key != 'JPY' || key != 'KRW')
+        {
+            let Temp = document.createElement('option')
+            Temp.value = key ; Temp.innerText = key
+            Currency1.appendChild(Temp)
+        }
+        if(key != 'USD' || key != 'EUR' || key != 'VND' || key != 'JPY' || key != 'KRW')
+        {
+            let Temp = document.createElement('option')
+            Temp.value = key ; Temp.innerText = key
+            Currency2.appendChild(Temp)
+        }
+    }
+   }
+   CreateElement()
    function ComfirmExchange() {
     let Comfirm = document.querySelector('.Equal')
     Comfirm.addEventListener('click', ()=>{
@@ -28,21 +43,10 @@ async function GetAPIData(url){
         let Rate1, Rate2
         let RealRate
         let Check
-        switch (Currency1.value) {
-            case 'USD': Rate1 = USD; break;
-            case 'EUR': Rate1 = EUR; break;
-            case 'VND': Rate1 = VND; break;
-            case 'JPY': Rate1 = JPY; break;
-            case 'WON': Rate1 = WON ; break;
-            default: break;
-        }
-        switch (Currency2.value) {
-            case 'USD': Rate2 = USD; break;
-            case 'EUR': Rate2 = EUR; break;
-            case 'VND': Rate2 = VND; break;
-            case 'JPY': Rate2 = JPY; break;
-            case 'WON': Rate2 = WON ; break;
-            default: break;
+        for (const key in RateData)
+        {
+            if(Currency1.value == key) Rate1 = RateData[key]
+            if(Currency2.value == key) Rate2 = RateData[key]
         }
         RealRate = Rate2/Rate1
         console.log(Input_Top.value)

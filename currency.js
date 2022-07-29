@@ -13,11 +13,6 @@ async function GetAPIData(url){
     var data = await response.json(); console.log(data);
     Title.setAttribute('title', `Tỉ giá được cập nhật bởi https://exchangerate.host vào lúc ${data.date}`)
     let RateData = data.rates
-    if(RateData == undefined) 
-    {
-        alert('Tính năng chuyển đổi tiền tệ hiện không hoạt động do lỗi kết nối với đơn vị cung cấp')
-        return
-    }
     /*
     Example : Base Currency is EUR
     VND/JPY = JPY rate(EUR) / VND rate(EUR)

@@ -19,6 +19,8 @@ const Currency = document.querySelectorAll('select')
 const Input_Box = document.querySelectorAll('input')
 const Top = document.querySelector('.Top')
 const Bottom = document.querySelector('.Bottom')
+const Navigation_icon = document.querySelector('#Nav-icon')
+const Navigation_note = document.querySelector('.Note')
 function Getnumbers() {
     number_input.forEach(button => {
         button.addEventListener('click', () => {
@@ -334,10 +336,17 @@ function switchmode() { // Some Stupid code Bro
         }
     })
 }
+function AnimationNav() {
+    Navigation_note.style.transform = 'translateX(-100%)'
+    Navigation_icon.addEventListener('click',()=>{
+        if(Navigation_note.style.transform == 'translateX(-100%)') Navigation_note.style.transform = 'translateX(0%)'
+        else Navigation_note.style.transform = 'translateX(-100%)'
+    })
+}
 function AnimationButtons() {
     const animationtime = 250
     const ColorBlue = 'rgb(13, 235, 235)'
-    const ColorWhite = 'rgba(255, 255, 255, 1)'
+    const ColorWhite = 'rgb(255, 255, 255)'
     const ColorGreen = 'rgb(122, 235, 8)'
     const ColorYellow = 'rgb(255, 215, 0)'
     const ColorGray = 'rgb(250, 250, 250)'
@@ -401,5 +410,6 @@ function main() {
     Delete()
     switchmode()
     AnimationButtons()
+    AnimationNav()
 }
 main()

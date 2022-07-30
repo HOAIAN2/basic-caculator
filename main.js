@@ -220,7 +220,7 @@ function Keyboard() {
         if (e.key == 'Delete' && e.repeat == true) clear_all_button.click()
         else {
             switch (e.key) {
-                case 's': Switch_Mode.click(); break;
+                case 'S': Switch_Mode.click(); break;
                 case '=': Equal_button.click(); break;
                 case 'Enter': Equal_button.click(); break;
                 case '1': number_input[0].click(); break;
@@ -249,7 +249,7 @@ function Keyboard() {
                 case '*': oparate_input[2].click(); break;
                 case '/': oparate_input[3].click(); break;
                 case '.': decimal.click(); break;
-                case 'h': history_button.click(); break;
+                case 'H': history_button.click(); break;
                 default: break;
             }
         }

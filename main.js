@@ -66,7 +66,13 @@ function Decimal() {
 function Negative() {
     negative_input.addEventListener('click', () => {
         if (Switch_Mode.innerText == 'CACULATOR') {
+            let block_index
             if (Current.innerText == '') Current.innerText = Current.innerText + '-'
+            if (Operationcheck() != 'NoOperate') {
+                block_index = Current.innerText.indexOf(Operationcheck(), 1)
+                if (Current.innerText[block_index + 1] == undefined) Current.innerText += '-'
+                else return
+            }
         }
     })
 }
@@ -89,16 +95,10 @@ function Getoperate() {
 function Operationcheck() {
     let Check = Current.innerText
     if (Check.indexOf('+', 1) != -1) return '+'
-    else {
-        if (Check.indexOf('-', 1) != -1) return '-'
-        else {
-            if (Check.indexOf('x', 1) != -1) return 'x'
-            else {
-                if (Check.indexOf('/', 1) != -1) return '/'
-                else return 'NoOperate' // return when user no caculate anything
-            }
-        }
-    }
+    if (Check.indexOf('x', 1) != -1) return 'x'
+    if (Check.indexOf('/', 1) != -1) return '/'
+    if (Check.indexOf('-', 1) != -1) return '-'
+    else return 'NoOperate' // return when user no caculate anything
 }
 function HistoryPage() {
     history_button.addEventListener('click', () => { // Lmao code only run at the second click
@@ -157,8 +157,7 @@ function Result() {
             let a = 1, b = 1, biggerfloat = 1, Fixed
             // Fix Floating Point number
             // if you typing "number1+" number2 will be NaN but if you typing "number1" number 2 will be 0
-            if(!isNaN(number2) && number2 !=0)
-            {
+            if (!isNaN(number2) && number2 != 0) {
                 if (isFloat(number1)) {
                     a = 1
                     while (isFloat(number1)) {
@@ -167,8 +166,6 @@ function Result() {
                     }
                     biggerfloat = a
                 }
-            }
-            if (!isNaN(number2) && number2 !=0) {
                 if (isFloat(number2)) {
                     b = 1
                     while (isFloat(number2)) {
@@ -186,20 +183,15 @@ function Result() {
                 }
             }
             switch (operate) {
-                case '+': if (isNaN(number2)) Fixed = number1
-                else Fixed = (number1 + number2) / biggerfloat
-                    break;
-                case '-': if (isNaN(number2)) Fixed = number1
-                else Fixed = (number1 - number2) / biggerfloat
-                    break;
-                case 'x': if (isNaN(number2)) Fixed = number1
-                else Fixed = (number1 * number2) / biggerfloat
-                    break;
-                case '/': if (isNaN(number2)) Fixed = number1
-                else Fixed = (number1 / number2) / biggerfloat
-                    break;
-                default: Fixed = number1
-                    break;
+                case '+': if (isNaN(number2)) Fixed = number1/biggerfloat
+                else Fixed = (number1 + number2) / biggerfloat ; break
+                case '-': if (isNaN(number2)) Fixed = number1/biggerfloat
+                else Fixed = (number1 - number2) / biggerfloat ; break
+                case 'x': if (isNaN(number2)) Fixed = number1/biggerfloat
+                else Fixed = (number1 * number2)  / (biggerfloat*biggerfloat) ; break
+                case '/': if (isNaN(number2)) Fixed = number1/biggerfloat
+                else Fixed = (number1 / number2) ; break
+                default: Fixed = number1/biggerfloat ; break
             }
             Current.innerText = Fixed
             if (isNaN(number2) || operate == 'NoOperate') Previous.innerText = Current.innerText
@@ -248,7 +240,12 @@ function Keyboard() {
                 case '+': oparate_input[0].click(); break;
                 case '-':
                     if (Current.innerText == '') negative_input.click()
-                    else oparate_input[1].click(); break;
+                    else
+                    {
+                        if(Operationcheck() != 'NoOperate') negative_input.click()
+                        else oparate_input[1].click()
+                    }
+                    break
                 case '*': oparate_input[2].click(); break;
                 case '/': oparate_input[3].click(); break;
                 case '.': decimal.click(); break;
@@ -343,24 +340,22 @@ function switchmode() { // Some Stupid code Bro
 }
 function AnimationNav() {
     Navigation_note.style.transform = 'translateX(-100%)'
-    Navigation_icon.addEventListener('click',()=>{
-        if(Navigation_note.style.transform == 'translateX(-100%)')
-        {
+    Navigation_icon.addEventListener('click', () => {
+        if (Navigation_note.style.transform == 'translateX(-100%)') {
             Full_Navigation.style.width = '300px'
             Full_Navigation.style.height = '100%'
             Navigation_note.style.display = 'block'
-            setTimeout(()=>{
+            setTimeout(() => {
                 Navigation_note.style.transform = 'translateX(0%)'
-            },0)
+            }, 0)
         }
-        else
-        {
+        else {
             Navigation_note.style.transform = 'translateX(-100%)'
-            setTimeout(()=>{
+            setTimeout(() => {
                 Full_Navigation.style.width = '50px'
                 Full_Navigation.style.height = '50px'
                 Navigation_note.style.display = 'none'
-            },500)
+            }, 500)
         }
     })
 }

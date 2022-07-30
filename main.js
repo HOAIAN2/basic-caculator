@@ -154,17 +154,21 @@ function Result() {
                 number1 = parseFloat(temp1)
                 number2 = parseFloat(temp2)
             }
+            let a = 1, b = 1, biggerfloat = 1, Fixed
             // Fix Floating Point number
-            let a = 1, b = 1, biggerfloat=1, Fixed
-            if (isFloat(number1)) {
-                a = 1
-                while (isFloat(number1)) {
-                    number1 = number1 * 10
-                    a = a * 10
+            // if you typing "number1+" number2 will be NaN but if you typing "number1" number 2 will be 0
+            if(!isNaN(number2) && number2 !=0)
+            {
+                if (isFloat(number1)) {
+                    a = 1
+                    while (isFloat(number1)) {
+                        number1 = number1 * 10
+                        a = a * 10
+                    }
+                    biggerfloat = a
                 }
-                biggerfloat = a
             }
-            if (!isNaN(number2)) {
+            if (!isNaN(number2) && number2 !=0) {
                 if (isFloat(number2)) {
                     b = 1
                     while (isFloat(number2)) {
@@ -182,19 +186,19 @@ function Result() {
                 }
             }
             switch (operate) {
-                case '+': if (isNaN(number2)) Fixed = number1 / biggerfloat
+                case '+': if (isNaN(number2)) Fixed = number1
                 else Fixed = (number1 + number2) / biggerfloat
                     break;
-                case '-': if (isNaN(number2)) Fixed = number1 / biggerfloat
+                case '-': if (isNaN(number2)) Fixed = number1
                 else Fixed = (number1 - number2) / biggerfloat
                     break;
-                case 'x': if (isNaN(number2)) Fixed = number1 / biggerfloat
+                case 'x': if (isNaN(number2)) Fixed = number1
                 else Fixed = (number1 * number2) / biggerfloat
                     break;
-                case '/': if (isNaN(number2)) Fixed = number1 / biggerfloat
+                case '/': if (isNaN(number2)) Fixed = number1
                 else Fixed = (number1 / number2) / biggerfloat
                     break;
-                default: Fixed = number1 / biggerfloat
+                default: Fixed = number1
                     break;
             }
             Current.innerText = Fixed
@@ -347,7 +351,7 @@ function AnimationNav() {
             Navigation_note.style.display = 'block'
             setTimeout(()=>{
                 Navigation_note.style.transform = 'translateX(0%)'
-            },10)
+            },0)
         }
         else
         {
@@ -356,7 +360,7 @@ function AnimationNav() {
                 Full_Navigation.style.width = '50px'
                 Full_Navigation.style.height = '50px'
                 Navigation_note.style.display = 'none'
-            },510)
+            },500)
         }
     })
 }

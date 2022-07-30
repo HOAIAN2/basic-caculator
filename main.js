@@ -19,6 +19,7 @@ const Currency = document.querySelectorAll('select')
 const Input_Box = document.querySelectorAll('input')
 const Top = document.querySelector('.Top')
 const Bottom = document.querySelector('.Bottom')
+const Full_Navigation = document.querySelector('.Nav')
 const Navigation_icon = document.querySelector('#Nav-icon')
 const Navigation_note = document.querySelector('.Note')
 function Getnumbers() {
@@ -339,8 +340,24 @@ function switchmode() { // Some Stupid code Bro
 function AnimationNav() {
     Navigation_note.style.transform = 'translateX(-100%)'
     Navigation_icon.addEventListener('click',()=>{
-        if(Navigation_note.style.transform == 'translateX(-100%)') Navigation_note.style.transform = 'translateX(0%)'
-        else Navigation_note.style.transform = 'translateX(-100%)'
+        if(Navigation_note.style.transform == 'translateX(-100%)')
+        {
+            Full_Navigation.style.width = '300px'
+            Full_Navigation.style.height = '100%'
+            Navigation_note.style.display = 'block'
+            setTimeout(()=>{
+                Navigation_note.style.transform = 'translateX(0%)'
+            },10)
+        }
+        else
+        {
+            Navigation_note.style.transform = 'translateX(-100%)'
+            setTimeout(()=>{
+                Full_Navigation.style.width = '50px'
+                Full_Navigation.style.height = '50px'
+                Navigation_note.style.display = 'none'
+            },510)
+        }
     })
 }
 function AnimationButtons() {

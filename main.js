@@ -27,13 +27,13 @@ function Getnumbers() {
         button.addEventListener('click', () => {
             if (Switch_Mode.innerText == 'CACULATOR') {
                 let block_index
-                if (Operationcheck() != 'NoOperate') block_index = Current.innerText.indexOf(Operationcheck());
+                if (Operationcheck() != 'NoOperate') block_index = Current.innerText.indexOf(Operationcheck())
                 if (Current.innerText.indexOf('0', block_index) == block_index + 1) {
                     block_index++
                     if (Current.innerText.indexOf('.', block_index) != block_index + 1) return
                 }
                 if (Current.innerText == '0') return
-                Current.innerText = Current.innerText + button.innerText;
+                Current.innerText = Current.innerText + button.innerText
             }
             else Input_Box[0].value += button.innerText
         })
@@ -44,7 +44,7 @@ function Decimal() {
         if (Switch_Mode.innerText == 'CACULATOR') {
             let firstDec = -1, secondDec = -1
             if (Current.innerText.indexOf('.') == Current.innerText.length - 1) return
-            if (Current.innerText == '') return;
+            if (Current.innerText == '') return
             if (Operationcheck() == 'NoOperate') {
                 if (Current.innerText.indexOf('.') != -1) return
             }
@@ -55,7 +55,7 @@ function Decimal() {
                 if (Current.innerText.indexOf('.', firstDec + 1) != -1) secondDec = Current.innerText.indexOf('.', firstDec + 1)
             }
             if (firstDec != -1 && secondDec != -1) return
-            else Current.innerText = Current.innerText + decimal.innerText;
+            else Current.innerText = Current.innerText + decimal.innerText
         }
         else {
             if (Input_Box[0].value.indexOf('.') == -1) Input_Box[0].value += decimal.innerText
@@ -87,7 +87,7 @@ function Getoperate() {
                 if (Check.indexOf('-', 1) != -1) Equal_button.click()
                 if (Check.indexOf('x', 1) != -1) Equal_button.click()
                 if (Check.indexOf('/', 1) != -1) Equal_button.click()
-                else Current.innerText = Current.innerText + button.innerText;
+                else Current.innerText = Current.innerText + button.innerText
             })
         }
     })
@@ -220,24 +220,25 @@ function Keyboard() {
         if (e.key == 'Delete' && e.repeat == true) clear_all_button.click()
         else {
             switch (e.key) {
-                case 'S': Switch_Mode.click(); break;
-                case '=': Equal_button.click(); break;
-                case 'Enter': Equal_button.click(); break;
-                case '1': number_input[0].click(); break;
-                case '2': number_input[1].click(); break;
-                case '3': number_input[2].click(); break;
-                case '4': number_input[3].click(); break;
-                case '5': number_input[4].click(); break;
-                case '6': number_input[5].click(); break;
-                case '7': number_input[6].click(); break;
-                case '8': number_input[7].click(); break;
-                case '9': number_input[8].click(); break;
-                case '0': number_input[9].click(); break;
+                case 'Tab': Navigation_icon.click() ; break
+                case 'S': Switch_Mode.click(); break
+                case '=': Equal_button.click(); break
+                case 'Enter': Equal_button.click(); break
+                case '1': number_input[0].click(); break
+                case '2': number_input[1].click(); break
+                case '3': number_input[2].click(); break
+                case '4': number_input[3].click(); break
+                case '5': number_input[4].click(); break
+                case '6': number_input[5].click(); break
+                case '7': number_input[6].click(); break
+                case '8': number_input[7].click(); break
+                case '9': number_input[8].click(); break
+                case '0': number_input[9].click(); break
                 case 'Delete':
                 case 'Backspace':
                     if (Process_Div.style.display == 'flex') delete_button.click()
-                    else history_clear.click(); break;
-                case '+': oparate_input[0].click(); break;
+                    else history_clear.click(); break
+                case '+': oparate_input[0].click(); break
                 case '-':
                     if (Current.innerText == '') negative_input.click()
                     else
@@ -246,11 +247,11 @@ function Keyboard() {
                         else oparate_input[1].click()
                     }
                     break
-                case '*': oparate_input[2].click(); break;
-                case '/': oparate_input[3].click(); break;
-                case '.': decimal.click(); break;
-                case 'H': history_button.click(); break;
-                default: break;
+                case '*': oparate_input[2].click(); break
+                case '/': oparate_input[3].click(); break
+                case '.': decimal.click(); break
+                case 'H': history_button.click(); break
+                default: break
             }
         }
     })

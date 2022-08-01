@@ -1,15 +1,15 @@
-const number_input = document.querySelectorAll('.Number')
-const decimal = document.querySelector('.Decimal')
-const oparate_input = document.querySelectorAll('.Operate')
-const negative_input = document.querySelector('.Negative')
-const clear_all_button = document.querySelector('.Clear-All')
-const history_button = document.querySelector('#History-Button')
-const history_clear = document.querySelector('#Clear-History')
+const Numbers_Input = document.querySelectorAll('.Number')
+const Decimal_Input = document.querySelector('.Decimal')
+const Operate_Input = document.querySelectorAll('.Operate')
+const Negative_Input = document.querySelector('.Negative')
+const Clear_All_Button = document.querySelector('.Clear-All')
+const History_Button = document.querySelector('#History-Button')
+const History__Clear_Button = document.querySelector('#Clear-History')
 const Full_History = document.querySelector('#History')
 const Main_History = document.querySelector('#History-Bar')
 const Result_Div = document.querySelector('.Result')
 const Process_Div = document.querySelector('#Main-Process')
-const delete_button = document.querySelector('.Delete')
+const Delete_Button = document.querySelector('.Delete')
 const Equal_button = document.querySelector('.Equal')
 const Previous = document.querySelector('.Previous')
 const Current = document.querySelector('.Current')
@@ -21,13 +21,13 @@ const Top = document.querySelector('.Top')
 const Bottom = document.querySelector('.Bottom')
 const Full_Navigation = document.querySelector('.Nav')
 const Navigation_icon = document.querySelector('#Nav-icon')
-const Navigation_note = document.querySelector('.Note')
+const Navigation_Node = document.querySelector('.Note')
 function Getnumbers() {
-    number_input.forEach(button => {
+    Numbers_Input.forEach(button => {
         button.addEventListener('click', () => {
             if (Switch_Mode.innerText == 'CACULATOR') {
                 let block_index
-                if (Operationcheck() != 'NoOperate') block_index = Current.innerText.indexOf(Operationcheck())
+                if (OperationCheck() != 'NoOperate') block_index = Current.innerText.indexOf(OperationCheck())
                 if (Current.innerText.indexOf('0', block_index) == block_index + 1) {
                     block_index++
                     if (Current.innerText.indexOf('.', block_index) != block_index + 1) return
@@ -40,12 +40,12 @@ function Getnumbers() {
     })
 }
 function Decimal() {
-    decimal.addEventListener('click', () => {
+    Decimal_Input.addEventListener('click', () => {
         if (Switch_Mode.innerText == 'CACULATOR') {
             let firstDec = -1, secondDec = -1
             if (Current.innerText.indexOf('.') == Current.innerText.length - 1) return
             if (Current.innerText == '') return
-            if (Operationcheck() == 'NoOperate') {
+            if (OperationCheck() == 'NoOperate') {
                 if (Current.innerText.indexOf('.') != -1) return
             }
             // find the first decimal, if click deciaml again ('..') block
@@ -55,29 +55,29 @@ function Decimal() {
                 if (Current.innerText.indexOf('.', firstDec + 1) != -1) secondDec = Current.innerText.indexOf('.', firstDec + 1)
             }
             if (firstDec != -1 && secondDec != -1) return
-            else Current.innerText = Current.innerText + decimal.innerText
+            else Current.innerText = Current.innerText + Decimal_Input.innerText
         }
         else {
-            if (Input_Box[0].value.indexOf('.') == -1) Input_Box[0].value += decimal.innerText
+            if (Input_Box[0].value.indexOf('.') == -1) Input_Box[0].value += Decimal_Input.innerText
             else return
         }
     })
 }
 function Negative() {
-    negative_input.addEventListener('click', () => {
+    Negative_Input.addEventListener('click', () => {
         if (Switch_Mode.innerText == 'CACULATOR') {
             let block_index
             if (Current.innerText == '') Current.innerText = Current.innerText + '-'
-            if (Operationcheck() != 'NoOperate') {
-                block_index = Current.innerText.indexOf(Operationcheck(), 1)
+            if (OperationCheck() != 'NoOperate') {
+                block_index = Current.innerText.indexOf(OperationCheck(), 1)
                 if (Current.innerText[block_index + 1] == undefined) Current.innerText += '-'
                 else return
             }
         }
     })
 }
-function Getoperate() {
-    oparate_input.forEach(button => {
+function GetOperate() {
+    Operate_Input.forEach(button => {
         if (Switch_Mode.innerText == 'CACULATOR') {
             button.addEventListener('click', () => {
                 let Check = document.querySelector('.Current').innerText;
@@ -92,7 +92,7 @@ function Getoperate() {
         }
     })
 }
-function Operationcheck() {
+function OperationCheck() {
     let Check = Current.innerText
     if (Check.indexOf('+', 1) != -1) return '+'
     if (Check.indexOf('x', 1) != -1) return 'x'
@@ -101,7 +101,7 @@ function Operationcheck() {
     else return 'NoOperate' // return when user no caculate anything
 }
 function HistoryPage() {
-    history_button.addEventListener('click', () => { // Lmao code only run at the second click
+    History_Button.addEventListener('click', () => { // Lmao code only run at the second click
         if (Process_Div.style.display == 'flex') {
             setTimeout(() => {
                 Process_Div.style.display = 'none'
@@ -123,7 +123,7 @@ function HistoryPage() {
     })
 }
 function ClearHistory() {
-    history_clear.addEventListener('click', () => {
+    History__Clear_Button.addEventListener('click', () => {
         let x = document.querySelectorAll('p')
         for (let index = 0; index < x.length; index++) {
             x[index].remove()
@@ -143,7 +143,7 @@ function Result() {
             let temp1, temp2 // create 2 temp and convert to string later
             let number1 = 0, number2 = 0
             // Check operation + - x / //
-            let operate = Operationcheck()
+            let operate = OperationCheck()
             if (operate == 'NoOperate') {
                 temp1 = CurrentString; number1 = parseFloat(temp1)
             }
@@ -204,58 +204,58 @@ function Result() {
     })
 }
 function ClearAll() {
-    clear_all_button.addEventListener('click', () => {
+    Clear_All_Button.addEventListener('click', () => {
         document.querySelector('.Previous').innerText = ''
         document.querySelector('.Current').innerText = ''
     })
 }
 function Delete() {
-    delete_button.addEventListener('click', () => {
+    Delete_Button.addEventListener('click', () => {
         if (Switch_Mode.innerText == 'CACULATOR') Current.innerText = Current.innerText.slice(0, Current.innerText.length - 1)
         else Input_Box[0].value = Input_Box[0].value.slice(0, Input_Box[0].value.length - 1)
     })
 }
 function Keyboard() {
     window.addEventListener('keydown', (e) => {
-        if (e.key == 'Delete' && e.repeat == true) clear_all_button.click()
+        if (e.key == 'Delete' && e.repeat == true) Clear_All_Button.click()
         else {
             switch (e.key) {
                 case 'Tab': Navigation_icon.click(); break
                 case 'S': Switch_Mode.click(); break
                 case '=': Equal_button.click(); break
                 case 'Enter': Equal_button.click(); break
-                case '1': number_input[0].click(); break
-                case '2': number_input[1].click(); break
-                case '3': number_input[2].click(); break
-                case '4': number_input[3].click(); break
-                case '5': number_input[4].click(); break
-                case '6': number_input[5].click(); break
-                case '7': number_input[6].click(); break
-                case '8': number_input[7].click(); break
-                case '9': number_input[8].click(); break
-                case '0': number_input[9].click(); break
+                case '1': Numbers_Input[0].click(); break
+                case '2': Numbers_Input[1].click(); break
+                case '3': Numbers_Input[2].click(); break
+                case '4': Numbers_Input[3].click(); break
+                case '5': Numbers_Input[4].click(); break
+                case '6': Numbers_Input[5].click(); break
+                case '7': Numbers_Input[6].click(); break
+                case '8': Numbers_Input[7].click(); break
+                case '9': Numbers_Input[8].click(); break
+                case '0': Numbers_Input[9].click(); break
                 case 'Delete':
                 case 'Backspace':
-                    if (Process_Div.style.display == 'flex') delete_button.click()
-                    else history_clear.click(); break
-                case '+': oparate_input[0].click(); break
+                    if (Process_Div.style.display == 'flex') Delete_Button.click()
+                    else History__Clear_Button.click(); break
+                case '+': Operate_Input[0].click(); break
                 case '-':
-                    if (Current.innerText == '') negative_input.click()
+                    if (Current.innerText == '') Negative_Input.click()
                     else {
-                        if (Operationcheck() != 'NoOperate') negative_input.click()
-                        else oparate_input[1].click()
+                        if (OperationCheck() != 'NoOperate') Negative_Input.click()
+                        else Operate_Input[1].click()
                     }
                     break
-                case '*': oparate_input[2].click(); break
-                case '/': oparate_input[3].click(); break
-                case '.': decimal.click(); break
-                case 'H': history_button.click(); break
+                case '*': Operate_Input[2].click(); break
+                case '/': Operate_Input[3].click(); break
+                case '.': Decimal_Input.click(); break
+                case 'H': History_Button.click(); break
                 default: break
             }
         }
     })
 }
-function switchmode() { // Some Stupid code Bro
+function SwitchMode() { // Some Stupid code Bro
     Switch_Mode.addEventListener('click', () => {
         if (Switch_Mode.innerText == 'CACULATOR') {
             Input_Box.forEach(box => {
@@ -265,25 +265,25 @@ function switchmode() { // Some Stupid code Bro
             Currency.forEach(button => {
                 button.style.display = 'block'
             })
-            number_input[0].style.order = '1'
-            number_input[1].style.order = '2'
-            number_input[2].style.order = '3'
-            number_input[3].style.order = '5'
-            number_input[4].style.order = '6'
-            number_input[5].style.order = '7'
-            number_input[6].style.order = '9'
-            number_input[7].style.order = '10'
-            number_input[8].style.order = '11'
-            number_input[9].style.order = '13'
-            clear_all_button.style.order = '4'
-            delete_button.style.order = '8'
-            decimal.style.order = '12'
+            Numbers_Input[0].style.order = '1'
+            Numbers_Input[1].style.order = '2'
+            Numbers_Input[2].style.order = '3'
+            Numbers_Input[3].style.order = '5'
+            Numbers_Input[4].style.order = '6'
+            Numbers_Input[5].style.order = '7'
+            Numbers_Input[6].style.order = '9'
+            Numbers_Input[7].style.order = '10'
+            Numbers_Input[8].style.order = '11'
+            Numbers_Input[9].style.order = '13'
+            Clear_All_Button.style.order = '4'
+            Delete_Button.style.order = '8'
+            Decimal_Input.style.order = '12'
             Equal_button.style.order = '14'
             Equal_button.style.width = '225px'
-            negative_input.style.display = 'none'
+            Negative_Input.style.display = 'none'
             Process_Div.style.height = '235px'
             Result_Div.style.height = '235px'
-            oparate_input.forEach(button => {
+            Operate_Input.forEach(button => {
                 button.style.display = 'none'
             })
             Result_Div.style.display = 'space-around'
@@ -302,28 +302,28 @@ function switchmode() { // Some Stupid code Bro
             Currency.forEach(button => {
                 button.style.display = 'none'
             })
-            negative_input.style.display = 'block'
-            oparate_input.forEach(button => {
+            Negative_Input.style.display = 'block'
+            Operate_Input.forEach(button => {
                 button.style.display = 'block'
             })
-            negative_input.style.order = '1'
-            clear_all_button.style.order = '2'
-            delete_button.style.order = '3'
-            oparate_input[0].style.order = '4'
-            oparate_input[1].style.order = '8'
-            oparate_input[2].style.order = '12'
-            oparate_input[3].style.order = '16'
-            decimal.style.order = '17'
-            number_input[0].style.order = '5'
-            number_input[1].style.order = '6'
-            number_input[2].style.order = '7'
-            number_input[3].style.order = '9'
-            number_input[4].style.order = '10'
-            number_input[5].style.order = '11'
-            number_input[6].style.order = '13'
-            number_input[7].style.order = '14'
-            number_input[8].style.order = '15'
-            number_input[9].style.order = '19'
+            Negative_Input.style.order = '1'
+            Clear_All_Button.style.order = '2'
+            Delete_Button.style.order = '3'
+            Operate_Input[0].style.order = '4'
+            Operate_Input[1].style.order = '8'
+            Operate_Input[2].style.order = '12'
+            Operate_Input[3].style.order = '16'
+            Decimal_Input.style.order = '17'
+            Numbers_Input[0].style.order = '5'
+            Numbers_Input[1].style.order = '6'
+            Numbers_Input[2].style.order = '7'
+            Numbers_Input[3].style.order = '9'
+            Numbers_Input[4].style.order = '10'
+            Numbers_Input[5].style.order = '11'
+            Numbers_Input[6].style.order = '13'
+            Numbers_Input[7].style.order = '14'
+            Numbers_Input[8].style.order = '15'
+            Numbers_Input[9].style.order = '19'
             Equal_button.style.order = '20'
             Equal_button.style.width = '150px'
             Process_Div.style.height = '300px'
@@ -339,22 +339,22 @@ function switchmode() { // Some Stupid code Bro
     })
 }
 function AnimationNav() {
-    Navigation_note.style.transform = 'translateX(-100%)'
+    Navigation_Node.style.transform = 'translateX(-100%)'
     Navigation_icon.addEventListener('click', () => {
-        if (Navigation_note.style.transform == 'translateX(-100%)') {
+        if (Navigation_Node.style.transform == 'translateX(-100%)') {
             Full_Navigation.style.width = '300px'
             Full_Navigation.style.height = '100%'
-            Navigation_note.style.display = 'block'
+            Navigation_Node.style.display = 'block'
             setTimeout(() => {
-                Navigation_note.style.transform = 'translateX(0%)'
+                Navigation_Node.style.transform = 'translateX(0%)'
             }, 0)
         }
         else {
-            Navigation_note.style.transform = 'translateX(-100%)'
+            Navigation_Node.style.transform = 'translateX(-100%)'
             setTimeout(() => {
                 Full_Navigation.style.width = '50px'
                 Full_Navigation.style.height = '50px'
-                Navigation_note.style.display = 'none'
+                Navigation_Node.style.display = 'none'
             }, 500)
         }
     })
@@ -415,7 +415,7 @@ function AnimationButtons() {
     })
 }
 function main() {
-    Process_Div.style.display = 'flex' // Fix first click on History
+    Process_Div.style.display = 'flex'
     Currency.forEach(button => {
         button.style.display = 'none'
     })
@@ -425,11 +425,11 @@ function main() {
     Getnumbers()
     Decimal()
     Negative()
-    Getoperate()
+    GetOperate()
     ClearAll()
     Result()
     Delete()
-    switchmode()
+    SwitchMode()
     AnimationButtons()
     AnimationNav()
 }

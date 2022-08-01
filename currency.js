@@ -39,6 +39,7 @@ async function GetAPIData(url) {
     function ComfirmExchange() {
         const Comfirm = document.querySelector('.Equal')
         Comfirm.addEventListener('click', () => {
+            if(Input_Top.value == '') return
             if (Switch_Mode.innerText == 'CURRENCY EXCHANGE') {
                 let Rate1, Rate2
                 let RealRate

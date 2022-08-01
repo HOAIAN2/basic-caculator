@@ -183,15 +183,15 @@ function Result() {
                 }
             }
             switch (operate) {
-                case '+': if (isNaN(number2)) Fixed = number1/biggerfloat
-                else Fixed = (number1 + number2) / biggerfloat ; break
-                case '-': if (isNaN(number2)) Fixed = number1/biggerfloat
-                else Fixed = (number1 - number2) / biggerfloat ; break
-                case 'x': if (isNaN(number2)) Fixed = number1/biggerfloat
-                else Fixed = (number1 * number2)  / (biggerfloat*biggerfloat) ; break
-                case '/': if (isNaN(number2)) Fixed = number1/biggerfloat
-                else Fixed = (number1 / number2) ; break
-                default: Fixed = number1/biggerfloat ; break
+                case '+': if (isNaN(number2)) Fixed = number1 / biggerfloat
+                else Fixed = (number1 + number2) / biggerfloat; break
+                case '-': if (isNaN(number2)) Fixed = number1 / biggerfloat
+                else Fixed = (number1 - number2) / biggerfloat; break
+                case 'x': if (isNaN(number2)) Fixed = number1 / biggerfloat
+                else Fixed = (number1 * number2) / (biggerfloat * biggerfloat); break
+                case '/': if (isNaN(number2)) Fixed = number1 / biggerfloat
+                else Fixed = (number1 / number2); break
+                default: Fixed = number1 / biggerfloat; break
             }
             Current.innerText = Fixed
             if (isNaN(number2) || operate == 'NoOperate') Previous.innerText = Current.innerText
@@ -220,7 +220,7 @@ function Keyboard() {
         if (e.key == 'Delete' && e.repeat == true) clear_all_button.click()
         else {
             switch (e.key) {
-                case 'Tab': Navigation_icon.click() ; break
+                case 'Tab': Navigation_icon.click(); break
                 case 'S': Switch_Mode.click(); break
                 case '=': Equal_button.click(); break
                 case 'Enter': Equal_button.click(); break
@@ -241,9 +241,8 @@ function Keyboard() {
                 case '+': oparate_input[0].click(); break
                 case '-':
                     if (Current.innerText == '') negative_input.click()
-                    else
-                    {
-                        if(Operationcheck() != 'NoOperate') negative_input.click()
+                    else {
+                        if (Operationcheck() != 'NoOperate') negative_input.click()
                         else oparate_input[1].click()
                     }
                     break
@@ -373,39 +372,44 @@ function AnimationButtons() {
             button.style.backgroundColor = ColorBlue
         })
         button.addEventListener('mouseleave', () => {
-            if (button.innerText == '1' || button.innerText == '2' || button.innerText == '3' || button.innerText == '4' || button.innerText == '5' || button.innerText == '6' || button.innerText == '7' || button.innerText == '8' || button.innerText == '9' || button.innerText == '0') button.style.backgroundColor = ColorGray
-            else button.style.backgroundColor = ColorWhite
+            switch (button.innerText) {
+                case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9': case '0': button.style.backgroundColor = ColorGray; break
+                default: button.style.backgroundColor = ColorWhite; break
+            }
         })
         button.addEventListener('click', () => {
-            if (button.innerText == '=') {
-                button.style.backgroundColor = ColorGreen
-                setTimeout(() => {
-                    button.style.backgroundColor = ColorWhite
-                }, animationtime)
-            }
-            if (button.innerText == 'Delete') {
-                button.style.backgroundColor = ColorYellow
-                setTimeout(() => {
-                    button.style.backgroundColor = ColorWhite
-                }, animationtime)
-            }
-            if (button.innerText == 'AC') {
-                button.style.backgroundColor = ColorRed
-                setTimeout(() => {
-                    button.style.backgroundColor = ColorWhite
-                }, animationtime)
-            }
-            if (button.innerText == '1' || button.innerText == '2' || button.innerText == '3' || button.innerText == '4' || button.innerText == '5' || button.innerText == '6' || button.innerText == '7' || button.innerText == '8' || button.innerText == '9' || button.innerText == '0') {
-                button.style.backgroundColor = ColorBlue
-                setTimeout(() => {
-                    button.style.backgroundColor = ColorGray
-                }, animationtime)
-            }
-            if (button.innerText == '+' || button.innerText == '-' || button.innerText == 'x' || button.innerText == '/' || button.innerText == '.' || button.innerText == '+/-') {
-                button.style.backgroundColor = ColorBlue
-                setTimeout(() => {
-                    button.style.backgroundColor = ColorWhite
-                }, animationtime)
+            switch (button.innerText) {
+                case '=':
+                    button.style.backgroundColor = ColorGreen
+                    setTimeout(() => {
+                        button.style.backgroundColor = ColorWhite
+                    }, animationtime)
+                    break
+                case 'Delete':
+                    button.style.backgroundColor = ColorYellow
+                    setTimeout(() => {
+                        button.style.backgroundColor = ColorWhite
+                    }, animationtime)
+                    break
+                case 'AC':
+                    button.style.backgroundColor = ColorRed
+                    setTimeout(() => {
+                        button.style.backgroundColor = ColorWhite
+                    }, animationtime)
+                    break
+                case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9': case '0':
+                    button.style.backgroundColor = ColorBlue
+                    setTimeout(() => {
+                        button.style.backgroundColor = ColorGray
+                    }, animationtime)
+                    break
+                case '+': case '-': case 'x': case '/':
+                    button.style.backgroundColor = ColorBlue
+                    setTimeout(() => {
+                        button.style.backgroundColor = ColorWhite
+                    }, animationtime)
+                    break
+                default: break
             }
         })
     })

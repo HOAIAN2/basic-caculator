@@ -33,6 +33,7 @@ function Getnumbers() {
                     if (Current.innerText.indexOf('.', block_index) != block_index + 1) return
                 }
                 if (Current.innerText == '0') return
+                if (Current.innerText == '-0') return
                 Current.innerText = Current.innerText + button.innerText
             }
             else Input_Box[0].value += button.innerText

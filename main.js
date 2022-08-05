@@ -46,6 +46,7 @@ function Decimal() {
             let firstDec = -1, secondDec = -1
             if (Current.innerText.indexOf('.') == Current.innerText.length - 1) return
             if (Current.innerText == '') return
+            if (Current.innerText == '-') return
             if (OperationCheck() == 'NoOperate') {
                 if (Current.innerText.indexOf('.') != -1) return
             }
@@ -82,6 +83,7 @@ function GetOperate() {
         if (Switch_Mode.innerText == 'CACULATOR') {
             button.addEventListener('click', () => {
                 let Check = document.querySelector('.Current').innerText;
+                if (OperationCheck() != 'NoOperate') return
                 if (Check == '') return
                 if (Check == '-') return
                 if (Check.indexOf('+', 1) != -1) Equal_button.click()
@@ -196,7 +198,7 @@ function Result() {
             }
             Current.innerText = Fixed
             if (isNaN(number2) || operate == 'NoOperate') Previous.innerText = Current.innerText
-            else Previous.innerText = temp1 + operate + temp2
+            else Previous.innerText = parseFloat(temp1) + operate + parseFloat(temp2)
             // Save result to History
             let history_temp = document.createElement("p");
             history_temp.innerText = Previous.innerText + ' = ' + Current.innerText
@@ -394,6 +396,12 @@ function AnimationButtons() {
                     break
                 case 'AC':
                     button.style.backgroundColor = ColorRed
+                    setTimeout(() => {
+                        button.style.backgroundColor = ColorWhite
+                    }, animationtime)
+                    break
+                case '+/-':
+                    button.style.backgroundColor = ColorBlue
                     setTimeout(() => {
                         button.style.backgroundColor = ColorWhite
                     }, animationtime)

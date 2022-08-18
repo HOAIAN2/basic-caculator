@@ -341,27 +341,6 @@ function SwitchMode() { // Some Stupid code Bro
         }
     })
 }
-function AnimationNav() {
-    Navigation_Node.style.transform = 'translateX(-100%)'
-    Navigation_icon.addEventListener('click', () => {
-        if (Navigation_Node.style.transform == 'translateX(-100%)') {
-            Full_Navigation.style.width = '300px'
-            Full_Navigation.style.height = '100%'
-            Navigation_Node.style.display = 'block'
-            setTimeout(() => {
-                Navigation_Node.style.transform = 'translateX(0%)'
-            }, 0)
-        }
-        else {
-            Navigation_Node.style.transform = 'translateX(-100%)'
-            setTimeout(() => {
-                Full_Navigation.style.width = '50px'
-                Full_Navigation.style.height = '50px'
-                Navigation_Node.style.display = 'none'
-            }, 500)
-        }
-    })
-}
 function AnimationButtons() {
     const animationtime = 250
     const ColorBlue = 'rgb(13, 235, 235)'
@@ -406,6 +385,12 @@ function AnimationButtons() {
                         button.style.backgroundColor = ColorWhite
                     }, animationtime)
                     break
+                case '.':
+                    button.style.backgroundColor = ColorBlue
+                    setTimeout(() => {
+                        button.style.backgroundColor = ColorWhite
+                    }, animationtime)
+                    break
                 case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9': case '0':
                     button.style.backgroundColor = ColorBlue
                     setTimeout(() => {
@@ -440,6 +425,5 @@ function main() {
     Delete()
     SwitchMode()
     AnimationButtons()
-    AnimationNav()
 }
 main()

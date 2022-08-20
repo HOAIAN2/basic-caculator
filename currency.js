@@ -50,6 +50,7 @@ async function GetAPIData(url) {
                 }
                 RealRate = Rate2 / Rate1
                 Check = RealRate * Input_Top.value
+                Check = Check.toFixed(2)
                 if (isNaN(Check)) Input_Bottom.value = 'Vui lòng nhập số hợp lệ'
                 else {
                     Input_Bottom.value = Check

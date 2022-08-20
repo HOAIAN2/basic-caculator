@@ -19,9 +19,6 @@ const Currency = document.querySelectorAll('select')
 const Input_Box = document.querySelectorAll('input')
 const Top = document.querySelector('.Top')
 const Bottom = document.querySelector('.Bottom')
-const Full_Navigation = document.querySelector('.Nav')
-const Navigation_icon = document.querySelector('#Nav-icon')
-const Navigation_Node = document.querySelector('.Note')
 function Getnumbers() {
     Numbers_Input.forEach(button => {
         button.addEventListener('click', () => {
@@ -223,7 +220,6 @@ function Keyboard() {
         if (e.key == 'Delete' && e.repeat == true) Clear_All_Button.click()
         else {
             switch (e.key) {
-                case 'Tab': Navigation_icon.click(); break
                 case 'S': Switch_Mode.click(); break
                 case '=': Equal_button.click(); break
                 case 'Enter': Equal_button.click(); break

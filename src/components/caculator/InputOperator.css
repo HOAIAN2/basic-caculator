@@ -1,0 +1,32 @@
+.input-operator {
+    width: 288px;
+    height: 310px;
+}
+
+.input-currency {
+    height: calc(310px - 62px);
+}
+
+.input-operator>button {
+    width: 72px;
+    height: 62px;
+    border: none;
+    outline: 1px solid var(--button-ouline);
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: var(--operator-background);
+    transition: 0.2s;
+}
+
+.input-operator>button:hover {
+    background-color: var(--hover);
+}
+
+.input-operator>button.equal {
+    width: calc(72px *2);
+}
+
+.input-currency>button.equal {
+    width: calc(72px *3);
+}

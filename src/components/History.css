@@ -1,0 +1,41 @@
+.history {
+    width: 300px;
+    height: 320px;
+    box-shadow: 0px -1px 10px var(--background-shadow);
+    background-color: var(--history);
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    transition: 0.5s ease;
+    overflow: hidden;
+}
+
+.history>div {
+    width: 300px;
+    height: 320px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    margin-left: 5px;
+    font-weight: bold;
+    word-wrap: break-word;
+}
+
+.history>div::-webkit-scrollbar {
+    display: none;
+}
+
+.history>.fa-trash-o {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.history-show {
+    bottom: 0px;
+}
+
+.history-hide {
+    bottom: -330px;
+}

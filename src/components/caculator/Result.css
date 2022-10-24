@@ -1,0 +1,78 @@
+.result {
+    width: 300px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.result-currency {
+    height: calc(525px - 30px);
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+.result-currency>div {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.result-currency>div>span {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.result-currency>div>select,
+option,
+input {
+    width: 250px;
+    height: 50px;
+    right: 0px;
+    font-size: 18px;
+    font-weight: bold;
+    padding-left: 5px;
+}
+
+.result-currency>div>div {
+    font-size: 24px;
+    font-weight: bold;
+}
+.result-currency>div>button {
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 10px;
+    height: 50px;
+    cursor: pointer;
+    color: white;
+    background-color: var(--hover);
+    text-align: center;
+    border: none;
+}
+.result-currency>div>select::-webkit-scrollbar {
+    display: none;
+}
+
+.result::-webkit-scrollbar {
+    display: none;
+}
+
+.result>span {
+    font-weight: bold;
+    margin-right: 4px;
+}
+
+.result>span.previous {
+    font-size: 20px;
+}
+
+.result>span.current {
+    font-size: 32px;
+}

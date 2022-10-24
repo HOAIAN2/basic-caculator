@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --background-white: rgb(245, 245, 245);
+    --background-shadow: rgba(0, 0, 0, 0.55);
+    --operator-background: rgb(250, 250, 250);
+    --number-background: rgb(225, 225, 255);
+    --button-ouline: rgb(215, 215, 215);
+    --hover: rgb(13, 235, 235);
+    --history: rgb(255, 255, 255);
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to bottom, rgb(66, 245, 215), rgb(72, 162, 247));
+}

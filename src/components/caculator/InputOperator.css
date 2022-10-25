@@ -23,10 +23,6 @@
     background-color: var(--hover);
 }
 
-.input-operator>button.equal {
+.input-operator>button.span2 {
     width: calc(72px *2);
-}
-
-.input-currency>button.equal {
-    width: calc(72px *3);
 }

@@ -1,54 +1,166 @@
 function caculate(inputString = '') {
-    const operate = getOperate(inputString)
-    let result = 1
-    const floatNumbers = getNumbers(inputString, operate)
-    if (inputString.indexOf(operate) === -1) return parseFloat(inputString)
-    if (isNaN(floatNumbers[0]) || isNaN(floatNumbers[1])) return floatNumbers[0]
-    const numbers = handleFloat(floatNumbers)
-    if (numbers[2] === 1) {
-        switch (operate) {
-            case '+': result = numbers[0] + numbers[1]
-                break;
-            case '-': result = numbers[0] - numbers[1]
-                break;
-            case 'x': result = numbers[0] * numbers[1]
-                break;
-            case '/': result = numbers[0] / numbers[1]
-                break;
-            default: break
+    const finalArray = parseArray(inputString)
+    return handleCalc(finalArray)
+}
+function handleCalc(finalArray = []) {
+    let isFail = false
+    finalArray.forEach(element => {
+        if (typeof element === 'number') {
+            if (isNaN(element)) isFail = true
+        }
+    })
+    if (isFail) return NaN
+    let result = 0
+    const operates = ['+', '-', 'x', '/']
+    const priorityOperates = ['x', '/']
+    const priorityIndexs = []
+    const operatesIndex = []
+    finalArray.forEach((element, index) => {
+        if (priorityOperates.includes(element)) priorityIndexs.push(index)
+    })
+    finalArray.forEach((element, index) => {
+        if (operates.includes(element)) operatesIndex.push(index)
+    })
+    if (priorityIndexs.length === operatesIndex.length) {
+        let isFirstCalc = true
+        while (finalArray.length !== 0) {
+            if (isFirstCalc) {
+                if (finalArray[1] === 'x') {
+                    const tempCalc = handleFloat([finalArray[0], finalArray[2]])
+                    result = (tempCalc[0] * tempCalc[1]) / (tempCalc[2] * tempCalc[2])
+                }
+                else {
+                    const tempCalc = handleFloat([finalArray[0], finalArray[2]])
+                    result = (tempCalc[0] / tempCalc[1])
+                }
+                finalArray.shift()
+                finalArray.shift()
+                finalArray.shift()
+                isFirstCalc = false
+            }
+            else {
+                if (finalArray[0] === 'x') {
+                    const tempCalc = handleFloat([result, finalArray[1]])
+                    result = (tempCalc[0] * tempCalc[1]) / (tempCalc[2] * tempCalc[2])
+                }
+                else {
+                    const tempCalc = handleFloat([result, finalArray[1]])
+                    result = (tempCalc[0] / tempCalc[1])
+                }
+                finalArray.shift()
+                finalArray.shift()
+            }
         }
     }
-    else {
-        switch (operate) {
-            case '+': result = (numbers[0] + numbers[1]) / numbers[2]
-                break;
-            case '-': result = (numbers[0] - numbers[1]) / numbers[2]
-                break;
-            case 'x': result = (numbers[0] * numbers[1]) / (numbers[2] * numbers[2])
-                break;
-            case '/': result = (numbers[0] / numbers[1])
-                break;
-            default: break
+    if (priorityIndexs.length !== 0 && priorityIndexs.length !== operatesIndex.length) {
+        const lowPriority = ['+', '-']
+        const lowPriorityIndexs = []
+        const temp = []
+        const newArray = []
+        let count = 0
+        finalArray.forEach((element, index) => {
+            if (lowPriority.includes(element)) lowPriorityIndexs.push(index)
+        })
+        for (let i = 0; i < lowPriorityIndexs.length; i++) {
+            if (i === 0) {
+                temp.push(handleCalc(finalArray.slice(0, lowPriorityIndexs[0])))
+            }
+            const markIndes = [lowPriorityIndexs[i], lowPriorityIndexs[i + 1]]
+            temp.push(handleCalc(finalArray.slice(markIndes[0] + 1, markIndes[1])))
+        }
+        while (newArray.length < (temp.length + lowPriorityIndexs.length)) {
+            newArray.push(temp[count])
+            if (finalArray[lowPriorityIndexs[count]]) newArray.push(finalArray[lowPriorityIndexs[count]])
+            count++
+        }
+        return handleCalc(newArray)
+    }
+    if (priorityIndexs.length === 0) {
+        let isFirstCalc = true
+        while (finalArray.length !== 0) {
+            if (isFirstCalc) {
+                if (finalArray[1] === '+') {
+                    const tempCalc = handleFloat([finalArray[0], finalArray[2]])
+                    result = (tempCalc[0] + tempCalc[1]) / tempCalc[2]
+                }
+                else {
+                    const tempCalc = handleFloat([finalArray[0], finalArray[2]])
+                    result = (tempCalc[0] - tempCalc[1]) / tempCalc[2]
+                    result = finalArray[0] - finalArray[2]
+                }
+                finalArray.shift()
+                finalArray.shift()
+                finalArray.shift()
+                isFirstCalc = false
+            }
+            else {
+                if (finalArray[0] === '+') result = result + finalArray[1]
+                else result = result = result - finalArray[1]
+                finalArray.shift()
+                finalArray.shift()
+            }
         }
     }
     return result
 }
-function getOperate(inputString = '') {
-    const operate = ['+', 'x', '/', '-']
-    for (let i = 0; i < operate.length; i++) {
-        let key = inputString.indexOf(operate[i], 1)
-        if (key !== -1) return operate[i]
-    }
+function parseArray(inputString = '') {
+    const allOperates = getAllOperates(inputString)
+    const allOperatesAsIndexs = getAllOperateIndexs(allOperates)
+    const floatNumbers = getNumbers(inputString, allOperatesAsIndexs)
+    const allOperatesAsArray = getAllOperatesAsArray(inputString, allOperatesAsIndexs)
+    const finalArray = getFinalArray(floatNumbers, allOperatesAsArray)
+    return finalArray
 }
-function getNumbers(inputString = '', operate = '') {
-    const operate_index = inputString.indexOf(operate, 1)
+function getFinalArray(floatNumbers = [], allOperatesAsArray = []) {
+    const finalArray = []
+    floatNumbers.forEach((number, index) => {
+        finalArray.push(number)
+        if (allOperatesAsArray[index]) finalArray.push(allOperatesAsArray[index])
+    })
+    return finalArray
+}
+function getAllOperatesAsArray(inputString = '', allOperatesAsIndexs = []) {
+    const allOperatesAsArray = []
+    allOperatesAsIndexs.forEach(index => {
+        allOperatesAsArray.push(inputString[index])
+    })
+    return allOperatesAsArray
+}
+function getAllOperates(inputString = '') {
+    const inputStringArr = inputString.split('')
+    const operates = {
+        '+': [],
+        '-': [],
+        'x': [],
+        '/': []
+    }
+    inputStringArr.forEach((char, index) => {
+        if (operates.hasOwnProperty(char)) {
+            if (!operates[char].includes(index - 1)) operates[char].push(index)
+        }
+    })
+    return operates
+}
+function getAllOperateIndexs(allOperates = { '+': [], '-': [], 'x': [], '/': [] }) {
+    const arr = [...allOperates['+'], ...allOperates['-'], ...allOperates['x'], ...allOperates['/']]
+    return arr.sort((x, y) => x - y)
+}
+function getNumbers(inputString = '', allOperatesAsArray = []) {
     const numberAsString = []
     const floatNumbers = []
-    // Cannot use split because '-' will broke, ex: '-125--5'
-    numberAsString[0] = inputString.slice(0, operate_index)
-    numberAsString[1] = inputString.substring(operate_index + 1, inputString.length)
-    floatNumbers[0] = parseFloat(numberAsString[0])
-    floatNumbers[1] = parseFloat(numberAsString[1])
+    for (let i = 0; i < allOperatesAsArray.length; i++) {
+        if (i === 0) {
+            const number = inputString.slice(0, allOperatesAsArray[0])
+            numberAsString.push(number)
+        }
+        const markIndes = [allOperatesAsArray[i], allOperatesAsArray[i + 1]]
+        const number = inputString.slice(markIndes[0] + 1, markIndes[1])
+        numberAsString.push(number)
+    }
+    numberAsString.forEach(number => {
+        const floatNumber = parseFloat(number)
+        floatNumbers.push(floatNumber)
+    })
     return floatNumbers
 }
 function handleFloat(floatNumbers = [1.0, 1.0]) {

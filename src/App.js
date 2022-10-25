@@ -25,7 +25,7 @@ function App() {
       })
   }, [])
   useEffect(() => {
-    if (current === '') return
+    if (current === '' || current === 'NaN') return
     setHistoryList([...historyList, `${previous} = ${current}`])
   }, [previous])
   const changeApp = () => {

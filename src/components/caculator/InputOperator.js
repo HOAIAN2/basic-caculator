@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react'
 import './InputOperator.css'
 function InputOperator({ props }) {
     const buttons = [
-        '+/-',
         'AC',
         'Delete',
         '+',
@@ -40,7 +39,7 @@ function InputOperator({ props }) {
     return (
         <div ref={ref} className='input-operator'>
             {buttons.map((button) => {
-                if (button === '=') return <button onClick={props.handleButtonClick} className='equal' key={button}>{button}</button>
+                if (button === '=' || button === 'AC') return <button onClick={props.handleButtonClick} className='span2' key={button}>{button}</button>
                 else return <button onClick={props.handleButtonClick} key={button}>{button}</button>
             })}
         </div>

@@ -3,6 +3,7 @@ function caculate(inputString = '') {
     return handleCalc(finalArray)
 }
 function handleCalc(finalArray = []) {
+    if (typeof finalArray[0] === 'number' && finalArray.length === 1) return finalArray[0]
     let isFail = false
     finalArray.forEach(element => {
         if (typeof element === 'number') {
@@ -68,11 +69,14 @@ function handleCalc(finalArray = []) {
             const markIndes = [lowPriorityIndexs[i], lowPriorityIndexs[i + 1]]
             temp.push(handleCalc(finalArray.slice(markIndes[0] + 1, markIndes[1])))
         }
+        console.log(temp)
         while (newArray.length < (temp.length + lowPriorityIndexs.length)) {
             newArray.push(temp[count])
             if (finalArray[lowPriorityIndexs[count]]) newArray.push(finalArray[lowPriorityIndexs[count]])
             count++
         }
+        console.log(finalArray)
+        console.log(newArray)
         return handleCalc(newArray)
     }
     if (priorityIndexs.length === 0) {

@@ -18,6 +18,7 @@ function ResultCurrency({ props }) {
         setLatest(`${amount} ${currency0} = ${result} ${currency1}`)
     }, [amount, currency0, currency1, result, latest])
     useEffect(() => {
+        if (latest === '') return
         if (latest !== props.historyList[props.historyList.length - 1])
             props.setHistoryList([...props.historyList, latest])
     }, [latest])

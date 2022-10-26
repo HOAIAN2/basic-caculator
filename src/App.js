@@ -28,9 +28,10 @@ function App() {
   useEffect(() => {
     if (current === '' || current === 'NaN' || previous === '' || latest.startsWith(previous)) return
     setLatest(`${previous} = ${current}`)
-  }, [current, previous, latest])
+  }, [current, previous])
   useEffect(() => {
-    if (latest !== historyList[historyList.length - 1])
+    if (latest === '') return
+    if (latest !== historyList[historyList.length - 1] && latest !== '')
       setHistoryList([...historyList, latest])
   }, [latest, historyList])
   const changeApp = () => {
@@ -42,6 +43,7 @@ function App() {
     else setHistoryState('hide')
   }
   const clearHistory = () => {
+    setLatest('')
     setHistoryList([])
   }
   const handleButtonClick = (e) => {

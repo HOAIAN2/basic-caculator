@@ -69,14 +69,11 @@ function handleCalc(finalArray = []) {
             const markIndes = [lowPriorityIndexs[i], lowPriorityIndexs[i + 1]]
             temp.push(handleCalc(finalArray.slice(markIndes[0] + 1, markIndes[1])))
         }
-        console.log(temp)
         while (newArray.length < (temp.length + lowPriorityIndexs.length)) {
             newArray.push(temp[count])
             if (finalArray[lowPriorityIndexs[count]]) newArray.push(finalArray[lowPriorityIndexs[count]])
             count++
         }
-        console.log(finalArray)
-        console.log(newArray)
         return handleCalc(newArray)
     }
     if (priorityIndexs.length === 0) {
@@ -110,7 +107,6 @@ function handleCalc(finalArray = []) {
 function parseArray(inputString = '') {
     const allOperates = getAllOperates(inputString)
     const allOperatesAsIndexs = getAllOperateIndexs(allOperates)
-    console.log(allOperatesAsIndexs)
     if (allOperatesAsIndexs.length === 0) return [parseFloat(inputString)]
     const floatNumbers = getNumbers(inputString, allOperatesAsIndexs)
     const allOperatesAsArray = getAllOperatesAsArray(inputString, allOperatesAsIndexs)

@@ -14,13 +14,13 @@ function ResultCurrency({ props }) {
         setResult((realRate * amount).toFixed(2))
     }
     useEffect(() => {
-        if (amount === '' || result === '') return
+        if (amount === '' || result === '' || latest.includes(result)) return
         setLatest(`${amount} ${currency0} = ${result} ${currency1}`)
     }, [amount, currency0, currency1, result, latest])
     useEffect(() => {
         if (latest !== props.historyList[props.historyList.length - 1])
             props.setHistoryList([...props.historyList, latest])
-    })
+    }, [latest])
     return (
         <div className="result result-currency">
             <div>

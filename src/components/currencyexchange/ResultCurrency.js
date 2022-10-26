@@ -4,6 +4,7 @@ function ResultCurrency({ props }) {
     const [currency1, setCurrency1] = useState('VND')
     const [amount, setAmount] = useState('')
     const [result, setResult] = useState('')
+    const [latest, setLatest] = useState('')
     const rates = []
     props.rates && Object.keys(props.rates).forEach(rate => {
         rates.push(rate)
@@ -13,9 +14,13 @@ function ResultCurrency({ props }) {
         setResult((realRate * amount).toFixed(2))
     }
     useEffect(() => {
-        if (result === '') return
-        props.setHistoryList([...props.historyList, `${amount} ${currency0} = ${result} ${currency1}`])
-    }, [result])
+        if (amount === '' || result === '') return
+        setLatest(`${amount} ${currency0} = ${result} ${currency1}`)
+    }, [amount, currency0, currency1, result, latest])
+    useEffect(() => {
+        if (latest !== props.historyList[props.historyList.length - 1])
+            props.setHistoryList([...props.historyList, latest])
+    })
     return (
         <div className="result result-currency">
             <div>

@@ -110,6 +110,7 @@ function handleCalc(finalArray = []) {
 function parseArray(inputString = '') {
     const allOperates = getAllOperates(inputString)
     const allOperatesAsIndexs = getAllOperateIndexs(allOperates)
+    if (allOperatesAsIndexs.length === 0) return [parseFloat(inputString)]
     const floatNumbers = getNumbers(inputString, allOperatesAsIndexs)
     const allOperatesAsArray = getAllOperatesAsArray(inputString, allOperatesAsIndexs)
     const finalArray = getFinalArray(floatNumbers, allOperatesAsArray)
@@ -139,6 +140,7 @@ function getAllOperates(inputString = '') {
         '/': []
     }
     inputStringArr.forEach((char, index) => {
+        if (index === 0) return
         if (operates.hasOwnProperty(char)) {
             if (!operates[char].includes(index - 1)) operates[char].push(index)
         }

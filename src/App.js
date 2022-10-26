@@ -12,6 +12,7 @@ function App() {
   const [app, setApp] = useState('CACULATOR')
   const [historyState, setHistoryState] = useState('hide')
   const [historyList, setHistoryList] = useState([])
+  const [latest, setLatest] = useState('')
   const [rates, setRates] = useState(null)
   const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
   const operators = ['+', '-', 'x', '/']
@@ -25,9 +26,13 @@ function App() {
       })
   }, [])
   useEffect(() => {
-    if (current === '' || current === 'NaN') return
-    setHistoryList([...historyList, `${previous} = ${current}`])
-  }, [previous])
+    if (current === '' || current === 'NaN' || previous === '' || latest.startsWith(previous)) return
+    setLatest(`${previous} = ${current}`)
+  }, [current, previous, latest])
+  useEffect(() => {
+    if (latest !== historyList[historyList.length - 1])
+      setHistoryList([...historyList, latest])
+  }, [latest, historyList])
   const changeApp = () => {
     if (app === 'CACULATOR') setApp('CURRENCY EXCHANGE')
     else setApp('CACULATOR')

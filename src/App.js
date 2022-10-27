@@ -76,7 +76,7 @@ function App() {
     <div className="App">
       <Controller props={{ app, changeApp, handleHistoryClick }} />
       <History props={{ historyState, historyList, clearHistory }} />
-      {app === 'CACULATOR' ? <Result props={{ current, previous }} /> : <ResultCurrency props={{ rates, historyList, setHistoryList }} />}
+      {app === 'CACULATOR' ? <Result props={{ current, previous }} /> : <ResultCurrency props={{ rates, historyList, setHistoryList, latest, setLatest }} />}
       {app === 'CACULATOR' ? <InputOperator props={{ handleButtonClick }} /> : null}
     </div>
   );

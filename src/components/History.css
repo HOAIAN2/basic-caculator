@@ -37,5 +37,5 @@
 }
 
 .history-hide {
-    bottom: -330px;
+    transform: translateY(110%);
 }

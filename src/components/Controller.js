@@ -7,6 +7,9 @@ function Controller({ props }) {
     if (e.key === 'H') ref1.current.click()
     if (e.key === 'S') ref0.current.click()
   }
+  const handleHistoryClick = () => {
+    props.historyState.current.classList.toggle('hide')
+  }
   useEffect(() => {
     window.addEventListener('keydown', handlePress)
     return () => {
@@ -16,7 +19,7 @@ function Controller({ props }) {
   return (
     <div className="controller">
       <span ref={ref0} onClick={props.changeApp}>{props.app}</span>
-      <i ref={ref1} onClick={props.handleHistoryClick} className="fa fa-history"></i>
+      <i ref={ref1} onClick={handleHistoryClick} className="fa fa-history"></i>
     </div>
   )
 }

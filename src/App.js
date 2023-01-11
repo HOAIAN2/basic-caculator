@@ -1,50 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createRef, useContext } from 'react';
 import Controller from './components/Controller';
 import History from './components/History';
 import Result from './components/caculator/Result';
 import InputOperator from './components/caculator/InputOperator';
-import ResultCurrency from './components/currencyexchange/ResultCurrency';
+import ResultCurrency from './components/currency-exchange/ResultCurrency';
+import { HISTORY_ACTION } from './store/reducer';
+import Context from './store/Context';
 import caculate from './libraries/caculateFromString';
 import './App.css'
 function App() {
   const [current, setCurrent] = useState('')
   const [previous, setPrevious] = useState('')
   const [app, setApp] = useState('CACULATOR')
-  const [historyState, setHistoryState] = useState('hide')
-  const [historyList, setHistoryList] = useState([])
-  const [latest, setLatest] = useState('')
   const [rates, setRates] = useState(null)
   const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
   const operators = ['+', '-', 'x', '/']
   const others = ['+/-', 'AC', 'Delete', '.', '=']
+  const historyState = createRef()
+  const [, historyDispatch] = useContext(Context)
   const API_URL = 'https://api.exchangerate.host/latest'
   useEffect(() => {
     fetch(API_URL)
       .then(res => res.json())
-      .then(blob => {
-        setRates(blob.rates)
+      .then(json => {
+        setRates(json.rates)
+      }).catch(e => {
+        console.log(e)
       })
   }, [])
-  useEffect(() => {
-    if (current === '' || current === 'NaN' || previous === '' || latest.startsWith(previous)) return
-    setLatest(`${previous} = ${current}`)
-  }, [current, previous])
-  useEffect(() => {
-    if (latest === '') return
-    if (latest !== historyList[historyList.length - 1] && latest !== '')
-      setHistoryList([...historyList, latest])
-  }, [latest, historyList])
   const changeApp = () => {
     if (app === 'CACULATOR') setApp('CURRENCY EXCHANGE')
     else setApp('CACULATOR')
-  }
-  const handleHistoryClick = () => {
-    if (historyState === 'hide') setHistoryState('show')
-    else setHistoryState('hide')
-  }
-  const clearHistory = () => {
-    setLatest('')
-    setHistoryList([])
   }
   const handleButtonClick = (e) => {
     if (numbers.includes(e.target.textContent)) {
@@ -64,8 +50,11 @@ function App() {
         case '.': setCurrent(pre => pre + e.target.textContent)
           break
         case '=':
+          const result = caculate(current).toString()
           setPrevious(current)
-          setCurrent(caculate(current).toString())
+          setCurrent(result)
+          const payload = `${current} = ${result}`
+          historyDispatch({ type: HISTORY_ACTION.ADD, payload: payload })
           break
         default:
           break;
@@ -74,9 +63,9 @@ function App() {
   }
   return (
     <div className="App">
-      <Controller props={{ app, changeApp, handleHistoryClick }} />
-      <History props={{ historyState, historyList, clearHistory }} />
-      {app === 'CACULATOR' ? <Result props={{ current, previous }} /> : <ResultCurrency props={{ rates, historyList, setHistoryList, latest, setLatest }} />}
+      <Controller props={{ app, changeApp, historyState }} />
+      <History props={historyState} />
+      {app === 'CACULATOR' ? <Result props={{ current, previous }} /> : <ResultCurrency rates={rates} />}
       {app === 'CACULATOR' ? <InputOperator props={{ handleButtonClick }} /> : null}
     </div>
   );

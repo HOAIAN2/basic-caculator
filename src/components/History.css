@@ -32,10 +32,10 @@
     cursor: pointer;
 }
 
-.history-show {
+.history {
     bottom: 0px;
 }
 
-.history-hide {
+.history.hide {
     transform: translateY(110%);
 }

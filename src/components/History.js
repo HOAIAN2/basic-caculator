@@ -8,7 +8,7 @@ function History(props) {
         historyDispatch({ type: HISTORY_ACTION.CLEAR })
     }
     return (
-        <div ref={props.props} className='history hide'>
+        <div ref={props.refs} className='history hide'>
             <div>
                 {history.map((history, index) => {
                     return <div key={index}>{history}</div>

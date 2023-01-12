@@ -1,4 +1,4 @@
-import { useState, useEffect, createRef, useContext } from 'react';
+import { useState, useEffect, createRef, useContext, useRef } from 'react';
 import Controller from './components/Controller';
 import History from './components/History';
 import Result from './components/caculator/Result';
@@ -17,6 +17,7 @@ function App() {
   const operators = ['+', '-', 'x', '/']
   const others = ['+/-', 'AC', 'Delete', '.', '=']
   const historyState = createRef()
+  const pre = useRef('')
   const [, historyDispatch] = useContext(Context)
   const API_URL = 'https://api.exchangerate.host/latest'
   useEffect(() => {
@@ -54,7 +55,9 @@ function App() {
           setPrevious(current)
           setCurrent(result)
           const payload = `${current} = ${result}`
+          if (payload === pre.current) break
           historyDispatch({ type: HISTORY_ACTION.ADD, payload: payload })
+          pre.current = payload
           break
         default:
           break;

@@ -66,10 +66,10 @@ function App() {
   }
   return (
     <div className="App">
-      <Controller props={{ app, changeApp, historyState }} />
-      <History props={historyState} />
-      {app === 'CACULATOR' ? <Result props={{ current, previous }} /> : <ResultCurrency rates={rates} />}
-      {app === 'CACULATOR' ? <InputOperator props={{ handleButtonClick }} /> : null}
+      <Controller app={app} changeApp={changeApp} historyState={historyState} />
+      <History refs={historyState} />
+      {app === 'CACULATOR' ? <Result current={current} previous={previous} /> : <ResultCurrency rates={rates} />}
+      {app === 'CACULATOR' ? <InputOperator handleButtonClick={handleButtonClick} /> : null}
     </div>
   );
 }

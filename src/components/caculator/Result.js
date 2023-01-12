@@ -1,5 +1,5 @@
 import './Result.css'
-function Result({ props }) {
+function Result(props) {
     return (
         <div className="result">
             <span className='previous'>{props.previous}</span>

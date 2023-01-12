@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import './Controller.css'
-function Controller({ props }) {
+function Controller(props) {
   const ref0 = useRef()
   const ref1 = useRef()
   const handlePress = (e) => {

@@ -1,6 +1,6 @@
 import { createRef, useEffect, useRef } from 'react'
 import './InputOperator.css'
-function InputOperator({ props }) {
+function InputOperator(props) {
     const buttons = [
         'AC',
         'Delete',

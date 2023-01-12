@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useRef } from 'react'
 import Context from '../../store/Context'
 import { HISTORY_ACTION } from '../../store/reducer'
 
@@ -8,12 +8,15 @@ function ResultCurrency(rates) {
     const [amount, setAmount] = useState('')
     const [result, setResult] = useState('')
     const [, historyDispatch] = useContext(Context)
+    const pre = useRef('')
     const handleConvert = () => {
         const realRate = rates.rates[currency1] / rates.rates[currency0]
         const result = (realRate * amount).toFixed(2)
         const payload = `${amount} ${currency0} = ${result} ${currency1}`
         setResult(result)
+        if (payload === pre.current) return
         historyDispatch({ type: HISTORY_ACTION.ADD, payload: payload })
+        pre.current = payload
     }
     return (
         <div className="result result-currency">
